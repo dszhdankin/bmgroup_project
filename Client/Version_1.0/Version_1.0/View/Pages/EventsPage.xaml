@@ -7,8 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EventsPage">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
+    </Page.Resources>
 
-    <Grid>
+    <Grid Background="{StaticResource ImageFillingPlaceholder}">
         
     </Grid>
 </Page>

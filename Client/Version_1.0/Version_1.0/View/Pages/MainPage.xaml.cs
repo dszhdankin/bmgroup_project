@@ -24,5 +24,10 @@ namespace Version_1._0.View.Pages
         {
             InitializeComponent();
         }
+
+        private void IKnowThatClicksAreBad(object sender, RoutedEventArgs e)
+        {
+            App.MainNavigationService.Navigate(new EventsPage());
+        }
     }
 }

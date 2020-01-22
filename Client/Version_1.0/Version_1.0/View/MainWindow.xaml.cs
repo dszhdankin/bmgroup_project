@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Version_1._0.View.Pages;
 
 namespace Version_1._0
 {
@@ -23,6 +24,8 @@ namespace Version_1._0
         public MainWindow()
         {
             InitializeComponent();
+            App.MainNavigationService.Navigate(new MainPage());
         }
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Version_1._0.Resources">
-    <BitmapImage x:Key="ImagePlaceholder" UriSource="../ImageResources/image_placeholder.jpg"> </BitmapImage>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ImageBrush x:Key="ImageFillingPlaceholder" ImageSource="C:\Users\zhdan\Desktop\work\Ебучая_грудина\22_gd-bmgroup\Client\Version_1.0\Version_1.0\imageresources\image_placeholder.jpg" Stretch="Fill"> </ImageBrush>
+    <BitmapImage x:Key="ButtonImagePlaceholder" UriSource="C:\Users\zhdan\Desktop\work\Ебучая_грудина\22_gd-bmgroup\Client\Version_1.0\Version_1.0\imageresources\button_image_placeholder.jpg"></BitmapImage>
 
 </ResourceDictionary>

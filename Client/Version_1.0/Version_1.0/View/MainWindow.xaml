@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Version_1._0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Frame x:Name="Frame" NavigationUIVisibility="Hidden"/>
-    <!--<Grid>
-
-        </Grid>-->
+        Title="MainWindow" Height="750.842" Width="1265.169">
+    <Grid>
+        <Frame x:Name="Frame" NavigationUIVisibility="Visible"/>
+    </Grid>
+    
+    
 </Window>
