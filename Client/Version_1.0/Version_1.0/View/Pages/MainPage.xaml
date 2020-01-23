@@ -11,7 +11,7 @@
     <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
 </Page.Resources>
 
-    <Grid ShowGridLines="True" Background="{DynamicResource ImageFillingPlaceholder}">
+    <Grid ShowGridLines="True" Background="{StaticResource ImageFillingPlaceholder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
