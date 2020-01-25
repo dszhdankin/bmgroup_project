@@ -1,0 +1,47 @@
+﻿<Page x:Class="Version_1._0.View.Pages.EventsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Version_1._0.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EventsPage">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="DeepSkyBlue">
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Margin="170,62,154,310" FontSize="60" Foreground="Black" TextAlignment="Center" RenderTransformOrigin="-1.189,0.625" FontFamily="Segoe UI Black"><Run Text="Мероприятия">
+    <Run.Background>
+        <ImageBrush/>
+    </Run.Background>
+</Run></TextBlock>
+        <Button Grid.Row="0" Grid.Column="0" RenderTransformOrigin="-11.586,-0.861" FontSize="20" >
+            <Grid Height="12" Width="92">
+                <TextBlock Grid.Row="3" FontSize="72"  Foreground="White" Grid.ColumnSpan="5"> <Run Text="Назад"/></TextBlock>
+            </Grid>
+        </Button>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" 
+                    VerticalAlignment="Center" Margin="422,22,18,358" HorizontalAlignment="Center"/>
+    </Grid>
+
+
+</Page>
