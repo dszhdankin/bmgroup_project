@@ -21,6 +21,21 @@ namespace Version_1._0.Model
             discription = dis;
             date = dat;
         }
+
+        public string Name
+        {
+            get => name;
+        }
+
+        public string Discription
+        {
+            get => discription;
+        }
+
+        public string Date
+        {
+            get => date.ToString(System.Globalization.CultureInfo.InstalledUICulture);
+        }
     }
 
     class ModelEvent
