@@ -1,51 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace Server
 {
-    internal class AsyncHttpServer
+    public class AsyncHttpServer
     {
-        private const string ResponseTemplate = "\"time\": \"{0}\"";
-
-        private readonly HttpListener _listener;
-
-        public AsyncHttpServer(uint portNumber)
+        private readonly uint _max_load;
+        private readonly List<AsyncHttpListener> _listeners;
+        private readonly HashSet<Task> _tasks;
+        public AsyncHttpServer(uint max_load)
         {
-            _listener = new HttpListener();
-            _listener.Prefixes.Add(string.Format("http://localhost:{0}/", portNumber));
+            _listeners  = new List<AsyncHttpListener>();
+            _max_load   = max_load;
+            _tasks      = new HashSet<Task>();
+        }
+
+        // TODO: REST url (with arguments)
+        // Note: actually, urls with arguments are matched to the closest existing url,
+        // so it can be checked in the decorator before the handler call
+        public void AddListener(IEnumerable<string> urls, Func<HttpListenerContext, Task> handler)
+        {
+            _listeners.Add(new AsyncHttpListener(_max_load, urls, handler));
         }
 
         public async Task Start()
         {
-            _listener.Start();
-
-            while (true)
+            foreach (var listener in _listeners)
             {
-                var ctx = await _listener.GetContextAsync();
-                Console.Out.WriteLine($"{DateTime.Now} {ctx.Request.HttpMethod}: '{ctx.Request.Url}'");
-
-                ctx.Response.Headers.Add("content-type: application/json; charset=UTF-8");
-
-                var response = "{" + string.Format(ResponseTemplate, DateTime.Now) + "}"; // curly braces are added after template formatting (C# struggles with formatting otherwise)
-                using (var sw = new StreamWriter(ctx.Response.OutputStream))
-                {
-                    await sw.WriteAsync(response);
-                    await sw.FlushAsync();
-                }
+                _tasks.Add(listener.Start());
+                await Console.Out.WriteLineAsync("Started a listener");
             }
         }
 
         public async Task Stop()
         {
-            await Console.Out.WriteLineAsync("Stopping server...");
-
-            if (_listener.IsListening)
-            {
-                _listener.Stop();
-                _listener.Close();
-            }
+            foreach (var listener in _listeners)
+                await listener.Stop();
         }
     }
 }
