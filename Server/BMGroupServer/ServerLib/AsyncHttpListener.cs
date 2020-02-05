@@ -14,21 +14,23 @@ namespace Server
         private readonly HashSet<Task> _requestSet;                                      // TODO: compare with (Concurrent?)Queue
         private bool _run;
         private readonly HttpListener _listener;
-        private readonly Func<HttpListenerContext, Task> _callback;
+        private readonly Func<HttpListenerContext, Dictionary<string, string[]>, Task> _callback;
+        public Dictionary<string, string[]> urlMethodsMap;
 
-        public AsyncHttpListener(uint maxRequests, IEnumerable<string> urls, Func<HttpListenerContext, Task> callback)
+        public AsyncHttpListener(uint maxRequests, Dictionary<string, string[]> urlMethodsMap, Func<HttpListenerContext, Dictionary<string, string[]>, Task> callback)
         {
             _listener = new HttpListener();
-            if (urls.Count() == 0)
+            if (urlMethodsMap.Count == 0)
                 throw new ArgumentException("Empty URL list");
 
-            foreach (string url in urls)
+            foreach (string url in urlMethodsMap.Keys)
                 _listener.Prefixes.Add(url);
 
-            _width      = maxRequests;
-            _callback   = callback;
-            _run        = true;
-            _requestSet = new HashSet<Task>();
+            _width          = maxRequests;
+            _callback       = callback;
+            _run            = true;
+            _requestSet     = new HashSet<Task>();
+            this.urlMethodsMap  = urlMethodsMap;
         }
 
         public async Task Start()
@@ -56,7 +58,7 @@ namespace Server
                         context.Response.ContentType = "application/json";
                         context.Response.ContentEncoding = System.Text.Encoding.UTF8;
                         // TODO: decide if the callback tasks should be in the _requestSet
-                        _requestSet.Add(_callback(context));                            // add the async callback task to the queue
+                        _requestSet.Add(_callback(context, urlMethodsMap));                            // add the async callback task to the queue
                         _requestSet.Add(_listener.GetContextAsync());                   // add new Task<HttpListenerContext> (we have removed one before)
                     }
                     // if something needs to be done with a callback right after its launch it should be done here, in the else clause

@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiEndpointAttribute.cs" />
+    <Compile Include="AsyncHttpListener.cs" />
     <Compile Include="AsyncHttpServer.cs" />
+    <Compile Include="Handler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerCLI.cs" />
   </ItemGroup>
