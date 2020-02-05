@@ -9,15 +9,15 @@ namespace Server
     public class ServerCLI
     {
         private const uint MAX_LOAD = 5;
-        private AsyncHttpServer server;
+        private AsyncHttpServer _server;
         public static string[] availableCommands = { "help", "start" };
-        Dictionary<Func<HttpListenerContext, Task>, IEnumerable<string>> urlMap;
+        
 
         // {handler: [IEnumerable of URLs relative to root]}
-        public ServerCLI(Dictionary<Func<HttpListenerContext, Task>, IEnumerable<string>> handlerUrlsMap)
+        public ServerCLI(AsyncHttpServer server) // Dictionary<Func<HttpListenerContext, Task>, IEnumerable<string>> handlerUrlsMap)
         {
-            server = new AsyncHttpServer(MAX_LOAD);
-            urlMap = handlerUrlsMap;
+            _server = server; // new AsyncHttpServer(MAX_LOAD);
+            // urlMap = handlerUrlsMap;
         }
 
         public async Task Parse(string command)
@@ -41,17 +41,10 @@ namespace Server
                     if (words.Length > 1 && uint.TryParse(words[1], out uint port_number))
                     {
                         await Console.Out.WriteLineAsync($"Starting a server at port {port_number}");
-
-                        foreach (var handler in urlMap.Keys)
-                        {
-                            var urls = from url in urlMap[handler]
-                                       select $"http://localhost:{port_number}" + url;
-                            server.AddListener(urls, handler);
-                        }
-
-                        await server.Start();
+                        _server.Port = port_number;
+                        await _server.Start();
                         exitEvent.WaitOne();        // wait for Ctrl + C
-                        await server.Stop();
+                        await _server.Stop();
                     }
                     else
                         Console.WriteLine("Incorrect command pattern");
