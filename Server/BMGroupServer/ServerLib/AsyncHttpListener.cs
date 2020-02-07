@@ -14,23 +14,23 @@ namespace Server
         private readonly HashSet<Task> _requestSet;                                      // TODO: compare with (Concurrent?)Queue
         private bool _run;
         private readonly HttpListener _listener;
-        private readonly Func<HttpListenerContext, Dictionary<string, string[]>, Task> _callback;
-        public Dictionary<string, string[]> urlMethodsMap;
+        private readonly Func<HttpListenerContext, IEnumerable<ApiEndpointUrl>, Task> _callback;
+        public IEnumerable<ApiEndpointUrl> urls;
 
-        public AsyncHttpListener(uint maxRequests, Dictionary<string, string[]> urlMethodsMap, Func<HttpListenerContext, Dictionary<string, string[]>, Task> callback)
+        public AsyncHttpListener(uint maxRequests, IEnumerable<ApiEndpointUrl> urls, Func<HttpListenerContext, IEnumerable<ApiEndpointUrl>, Task> callback)
         {
             _listener = new HttpListener();
-            if (urlMethodsMap.Count == 0)
+            if (urls.Count() == 0)
                 throw new ArgumentException("Empty URL list");
 
-            foreach (string url in urlMethodsMap.Keys)
-                _listener.Prefixes.Add(url);
+            foreach (var url in urls)
+                _listener.Prefixes.Add(url.GetAbsoluteUrl());
 
             _width          = maxRequests;
             _callback       = callback;
             _run            = true;
             _requestSet     = new HashSet<Task>();
-            this.urlMethodsMap  = urlMethodsMap;
+            this.urls       = urls;
         }
 
         public async Task Start()
@@ -52,16 +52,10 @@ namespace Server
                     if (t is Task<HttpListenerContext>)                                 // if t was created by _listener.GetContextAsync()  (callbacks are processed on their own)
                     {
                         var context = (t as Task<HttpListenerContext>).Result;
-                        // TODO: implement a logging system worth using
-                        Console.Out.WriteLine($"{DateTime.Now} {context.Request.HttpMethod}: '{context.Request.Url}'");
-
-                        context.Response.ContentType = "application/json";
-                        context.Response.ContentEncoding = System.Text.Encoding.UTF8;
                         // TODO: decide if the callback tasks should be in the _requestSet
-                        _requestSet.Add(_callback(context, urlMethodsMap));                            // add the async callback task to the queue
+                        _requestSet.Add(_callback(context, urls));                      // add the async callback task to the queue
                         _requestSet.Add(_listener.GetContextAsync());                   // add new Task<HttpListenerContext> (we have removed one before)
                     }
-                    // if something needs to be done with a callback right after its launch it should be done here, in the else clause
                 }
                 catch (AggregateException e)
                 {

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiEndpointAttribute.cs" />
+    <Compile Include="ApiEndpointUrl.cs" />
     <Compile Include="AsyncHttpListener.cs" />
     <Compile Include="AsyncHttpServer.cs" />
     <Compile Include="Handler.cs" />
