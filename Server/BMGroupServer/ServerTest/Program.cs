@@ -1,7 +1,6 @@
 ﻿using Server;
 using System;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace ServerTest
 {
@@ -25,18 +24,19 @@ namespace ServerTest
     
     public class Placeholder
     { 
-        [ApiEndpoint("/", "GET")]
-        public static async Task<string> HandlerPlaceholder(System.Net.HttpListenerContext context)
+        [ApiEndpoint("/<int>", "GET")]
+        public static async Task<string> HandlerPlaceholder1(System.Net.HttpListenerContext context)
         {
-            var response = $"{{\"time\": \"{DateTime.Now}\"}}";
+            int argument = ApiEndpointUrl.GetIntArgument(context.Request.RawUrl);
+            var response = $"{{\"time\": \"{DateTime.Now}\", \"argument\": {argument}}}";
             return response;
         }
 
         [ApiEndpoint("/AAA/", "GET", "POST")]
-        [ApiEndpoint("/BBB/", "GET")]
+        [ApiEndpoint("/BBB/<string>", "GET")]
         public static async Task<string> HandlerPlaceholder2(System.Net.HttpListenerContext context)
         {
-            var response = "AAAAA";
+            var response = ApiEndpointUrl.GetStringArgument(context.Request.RawUrl);
             return response;
         }
     }
