@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Server
@@ -12,12 +9,9 @@ namespace Server
         private AsyncHttpServer _server;
         public static string[] availableCommands = { "help", "start" };
         
-
-        // {handler: [IEnumerable of URLs relative to root]}
-        public ServerCLI(AsyncHttpServer server) // Dictionary<Func<HttpListenerContext, Task>, IEnumerable<string>> handlerUrlsMap)
+        public ServerCLI(AsyncHttpServer server)
         {
-            _server = server; // new AsyncHttpServer(MAX_LOAD);
-            // urlMap = handlerUrlsMap;
+            _server = server;
         }
 
         public async Task Parse(string command)

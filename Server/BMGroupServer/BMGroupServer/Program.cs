@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Server;
 
 
@@ -14,7 +10,7 @@ namespace BMGroupServer
 
         static void Main()
         {
-            server = new AsyncHttpServer(5, typeof(Views.PlaceholderView));
+            server = new AsyncHttpServer(5, typeof(Views.PlaceholderView), typeof(Views.ClassView));
             ServerCLI cli = new ServerCLI(server);
 
             Console.WriteLine("Available commands:\n\t" + string.Join("\n\t", ServerCLI.availableCommands));

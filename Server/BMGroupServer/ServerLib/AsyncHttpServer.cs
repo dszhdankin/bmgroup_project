@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -15,8 +13,8 @@ namespace Server
         private readonly HashSet<Task> _tasks;
 
         private Dictionary<
-            Func<HttpListenerContext, Dictionary<string, string[]>, Task>, 
-            Dictionary<string, string[]>> urlMap;
+            Func<HttpListenerContext, IEnumerable<ApiEndpointUrl>, Task>, 
+            IEnumerable<ApiEndpointUrl>> urlMap;
         
         private uint _port = 0;
         public uint Port 
@@ -37,46 +35,40 @@ namespace Server
             _max_load   = maxLoad;
             _tasks      = new HashSet<Task>();
             urlMap      = new Dictionary<
-                Func<HttpListenerContext, Dictionary<string, string[]>, Task>,
-                Dictionary<string, string[]>>();
+                Func<HttpListenerContext, IEnumerable<ApiEndpointUrl>, Task>,
+                IEnumerable<ApiEndpointUrl>>();
 
-            Dictionary<string, string[]> urlMethodsMap = new Dictionary<string, string[]>();
+            List<ApiEndpointUrl> urls = new List<ApiEndpointUrl>();
             foreach (var type in apiClasses)
             {
                 foreach (var method in type.GetMethods())
                 {
-                    urlMethodsMap = new Dictionary<string, string[]>();
+                    urls = new List<ApiEndpointUrl>();
                     if (Attribute.IsDefined(method, typeof(ApiEndpointAttribute)))
                     {
                         var meta = (ApiEndpointAttribute[])Attribute.GetCustomAttributes(method, typeof(ApiEndpointAttribute));
                         foreach (var att in meta)
-                            urlMethodsMap["http://{0}:{1}" + att.URL] = (att.httpMethods.Length > 0) ? att.httpMethods : new string[] { "GET" };
+                            urls.Add(att.URL);
                     }
-                    if (urlMethodsMap.Count == 0)
+                    if (urls.Count == 0)
                         continue;
                     
-                    // TODO: handler decorator
-
                     // assuming ApiEndpoint attributes are used correctly (public static async Task ...(HttpListenerContext) { ... })
                     var handler = (Func<HttpListenerContext, Task<string>>) Delegate.CreateDelegate(
                         typeof(Func<HttpListenerContext, Task<string>>), type, method.Name);
-                    var wrappedHandler = (Func<HttpListenerContext, Dictionary<string, string[]>, Task>) Delegate.CreateDelegate(
-                        typeof(Func<HttpListenerContext, Dictionary<string, string[]>, Task>), 
+                    var wrappedHandler = (Func<HttpListenerContext, IEnumerable<ApiEndpointUrl>, Task>) Delegate.CreateDelegate(
+                        typeof(Func<HttpListenerContext, IEnumerable<ApiEndpointUrl>, Task>), 
                         new Handler(handler), 
                         "Handle");
-                    urlMap.Add(wrappedHandler, urlMethodsMap);
+                    urlMap.Add(wrappedHandler, urls);
                     
                 }
             }
-
         }
 
-        // TODO: REST url (with arguments)
-        // Note: actually, urls with arguments are matched to the closest existing url,
-        // so it can be checked in the decorator before the handler call
-        private void AddListener(Func<HttpListenerContext, Dictionary<string, string[]>, Task> handler, Dictionary<string, string[]> urlMethodsMap)
+        private void AddListener(Func<HttpListenerContext, IEnumerable<ApiEndpointUrl>, Task> handler, IEnumerable<ApiEndpointUrl> urls)
         {
-            _listeners.Add(new AsyncHttpListener(_max_load, urlMethodsMap, handler));
+            _listeners.Add(new AsyncHttpListener(_max_load, urls, handler));
         }
 
         // Start listeners (not awaiting!)
@@ -87,10 +79,9 @@ namespace Server
 
             foreach (var handler in urlMap.Keys)
             {
-                var finalMap = new Dictionary<string, string[]>();
-                foreach (var url in urlMap[handler].Keys)
-                    finalMap[string.Format(url, HOST, Port)] = urlMap[handler][url];
-                AddListener(handler, finalMap);
+                foreach (var url in urlMap[handler])
+                    url.absolutePrefix = $"http://{HOST}:{Port}";
+                AddListener(handler, urlMap[handler]);
             }
 
             foreach (var listener in _listeners)
