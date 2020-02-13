@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Server
 {
@@ -36,11 +37,11 @@ namespace Server
                 response = await innerFunction(context);
                 // after
             }
-            catch (ArgumentException e)
+            catch (HttpException e)
             {
                 await Console.Out.WriteLineAsync(e.Message);
-                response = "Error";
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                response = e.Message;
+                context.Response.StatusCode = e.ErrorCode;
             }
             catch (Exception e)
             {

@@ -39,5 +39,37 @@ namespace BMGroupServer.Views
                 }
             }
         }
+
+        [ApiEndpoint("/class/", "GET", "POST")]
+        [ApiEndpoint("/class/<int>", "GET")]
+        public static async Task<string> GetEvents(System.Net.HttpListenerContext context)
+        {
+            var js = new JavaScriptSerializer();
+            using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+            {
+                if (context.Request.HttpMethod == "POST")
+                {
+                    try
+                    {
+                        var evt = await Services.EventService.CreateFromJson(reader.ReadToEnd());
+                        return evt.EventId.ToString();
+                    } catch (Exception ex)
+                    {
+                        throw new ArgumentException(ex.Message);
+                    }
+                }
+                try
+                {
+                    int eventId = ApiEndpointUrl.GetIntArgument(context.Request.RawUrl);
+                    var evt = Services.EventService.GetEvent(eventId);
+                    return js.Serialize(evt);
+                }
+                catch (ArgumentException e)
+                {
+                    var events = Services.EventService.GetEvents(1);
+                    return js.Serialize(events);
+                }
+            }
+        }
     }
 }
