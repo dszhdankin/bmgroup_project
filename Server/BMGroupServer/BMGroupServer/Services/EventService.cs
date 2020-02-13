@@ -39,7 +39,7 @@ namespace BMGroupServer.Services
                 var evt = (Event)js.Deserialize(jsonString, typeof(Event));
             } catch (Exception ex)
             {
-                throw ex;
+                throw new PageNotFoundException("wrong JSON object format");
             }
             using (var context = new SchoolServiceDBContext())
             {

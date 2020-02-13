@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using ServerLib;
 
 namespace BMGroupServer.Views
 {
@@ -32,7 +33,7 @@ namespace BMGroupServer.Views
                     var cls = Services.ClassService.GetClass(classId);
                     return js.Serialize(cls);
                 }
-                catch (ArgumentException e)
+                catch (PageNotFoundException e)
                 {
                     var classes = Services.ClassService.GetClasses(1);
                     return js.Serialize(classes);
@@ -40,8 +41,8 @@ namespace BMGroupServer.Views
             }
         }
 
-        [ApiEndpoint("/class/", "GET", "POST")]
-        [ApiEndpoint("/class/<int>", "GET")]
+        [ApiEndpoint("/event/", "GET", "POST")]
+        [ApiEndpoint("/event/<int>", "GET")]
         public static async Task<string> GetEvents(System.Net.HttpListenerContext context)
         {
             var js = new JavaScriptSerializer();
@@ -55,7 +56,7 @@ namespace BMGroupServer.Views
                         return evt.EventId.ToString();
                     } catch (Exception ex)
                     {
-                        throw new ArgumentException(ex.Message);
+                        throw new PageNotFoundException("Wrong JSON object formst");
                     }
                 }
                 try
