@@ -19,5 +19,34 @@ namespace BMGroupServer.Services
                 return school.Events.ToList();
             }
         }
+
+        public static Event GetEvent(int eventId)
+        {
+            using (var context = new SchoolServiceDBContext())
+            {
+                var evt = context.Events.Find(eventId);
+                if (evt is null)
+                    throw new ArgumentException($"Event {eventId} not found");
+                return evt;
+            }
+        }
+
+        public static async Task<Class> CreateFromJson(string jsonString)
+        {
+            var js = new JavaScriptSerializer();
+            try
+            {
+                var evt = (Event)js.Deserialize(jsonString, typeof(Event));
+            } catch (Exception ex)
+            {
+                throw new PageNotFoundException("wrong JSON object format");
+            }
+            using (var context = new SchoolServiceDBContext())
+            {
+                context.Classes.Add(evt);
+                await context.SaveChangesAsync();
+            }
+            return evt;
+        }
     }
 }
