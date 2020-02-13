@@ -63,7 +63,7 @@ namespace Version_1._0.Model
             {
                 list.Add(new Lesson((string)token["name"], (string)token["cabinet"], (DateTime)token["time"]));
             }
-            return null;
+            return list;
         }
     }
 }
