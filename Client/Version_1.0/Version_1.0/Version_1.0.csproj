@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +58,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ModelEvent.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="ViewModel\EventButtonVM.cs" />
+    <Compile Include="ViewModel\EventsPageVM.cs" />
+    <Compile Include="ViewModel\MainPageVM.cs" />
+    <Compile Include="View\Controls\Schedule.xaml.cs">
+      <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\EventButton.xaml.cs">
+      <DependentUpon>EventButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\EmployeeButton.xaml.cs">
+      <DependentUpon>EmployeeButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\EmployeePage.xaml.cs">
+      <DependentUpon>EmployeePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
     </Compile>
@@ -62,6 +83,18 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\ImageResourcesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\Schedule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\EventButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\EmployeeButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -77,6 +110,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Pages\EmployeePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Pages\EventsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +141,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -113,15 +151,34 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="ViewModel\" />
+    <Resource Include="imageresources\main_background_image.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="imageresources\button_image_placeholder.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="imageresources\image_placeholder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\event_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\employee_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\inauguration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\networking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\open-book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\teacher.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

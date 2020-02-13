@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ImageBrush x:Key="ImageFillingPlaceholder" ImageSource="pack://application:,,,/imageresources/image_placeholder.jpg" Stretch="Fill"> </ImageBrush>
+
+    <BitmapImage x:Key="ButtonImagePlaceholder" UriSource="pack://application:,,,/imageresources/button_party1_image_placeholder.jpg
+                 ">
+        
+    </BitmapImage>
+
+    
+</ResourceDictionary>
