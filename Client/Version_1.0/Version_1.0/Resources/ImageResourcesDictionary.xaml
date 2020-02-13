@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <ImageBrush x:Key="ImageFillingPlaceholder" ImageSource="pack://application:,,,/imageresources/image_placeholder.jpg" Stretch="Fill"> </ImageBrush>
-    <BitmapImage x:Key="ButtonImagePlaceholder" UriSource="pack://application:,,,/imageresources/button_image_placeholder.jpg"></BitmapImage>
-
+    <ImageBrush x:Key="MainBackgroundImage" ImageSource="pack://application:,,,/imageresources/main_background_image.png" Stretch="Fill"> </ImageBrush>
+    <ImageBrush x:Key="EventBackGround" ImageSource="pack://application:,,,/imageresources/event_background.png"></ImageBrush>
+    <BitmapImage x:Key="OpenBookImage" UriSource="pack://application:,,,/imageresources/open-book.png"></BitmapImage>
+    <BitmapImage x:Key="ElectivesButtonImage" UriSource="pack://application:,,,/imageresources/teacher.png"></BitmapImage>
+    <BitmapImage x:Key="EventsButtonImage" UriSource="pack://application:,,,/imageresources/inauguration.png"></BitmapImage>
+    <BitmapImage x:Key="ScheduleButtonImage" UriSource="pack://application:,,,/imageresources/schedule.png"></BitmapImage>
+    <BitmapImage x:Key="EmployeesButtonImage" UriSource="pack://application:,,,/imageresources/networking.png"></BitmapImage>
 </ResourceDictionary>

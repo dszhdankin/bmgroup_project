@@ -129,12 +129,35 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="imageresources\main_background_image.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="imageresources\button_image_placeholder.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="imageresources\image_placeholder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\event_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\employee_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\inauguration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\networking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\open-book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\teacher.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

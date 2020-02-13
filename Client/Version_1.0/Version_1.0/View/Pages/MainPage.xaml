@@ -16,7 +16,7 @@
         <vm:MainPageVM></vm:MainPageVM>
     </Page.DataContext>
 
-    <Grid ShowGridLines="True" Background="{StaticResource ImageFillingPlaceholder}">
+    <Grid ShowGridLines="False" Background="{StaticResource MainBackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
@@ -31,50 +31,50 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="1" Grid.Column="1">
+        <Button Grid.Row="1" Grid.Column="1" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="{StaticResource ButtonImagePlaceholder}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding TimetableTitle}"></TextBlock>
+                <Image Source="{StaticResource ScheduleButtonImage}" Stretch="Fill"></Image>
+                <TextBlock Grid.Row="1" Text="{Binding TimetableTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="3" Grid.Column="1">
+        <Button Grid.Row="3" Grid.Column="1" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="{StaticResource ButtonImagePlaceholder}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding ElectivesTitle}"> </TextBlock>
+                <Image Grid.Row="0" Source="{StaticResource ElectivesButtonImage}" Stretch="Fill"></Image>
+                <TextBlock Grid.Row="1" Text="{Binding ElectivesTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"> </TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="3"  Command="{Binding ToEventsCommand}">
+        <Button Grid.Row="1" Grid.Column="3"  Command="{Binding ToEventsCommand}" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="{StaticResource ButtonImagePlaceholder}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding EventsTitle}"> </TextBlock>
+                <Image Grid.Row="0" Source="{StaticResource EventsButtonImage}" Stretch="Fill"></Image>
+                <TextBlock Grid.Row="1" Text="{Binding EventsTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"> </TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="3" Grid.Column="3">
+        <Button Grid.Row="3" Grid.Column="3" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="{StaticResource ButtonImagePlaceholder}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding EmployeesTitle}"> </TextBlock>
+                <Image Grid.Row="0" Source="{StaticResource EmployeesButtonImage}" Stretch="Fill"></Image>
+                <TextBlock Grid.Row="1" Text="{Binding EmployeesTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"> </TextBlock>
             </Grid>
         </Button>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" 
                     VerticalAlignment="Center" Margin="20" HorizontalAlignment="Center">
-            <Image Source="{StaticResource ButtonImagePlaceholder}" Height="50"></Image>
-            <TextBlock Margin="50 0 0 0" FontSize="30" Foreground="White" TextAlignment="Center" Text="{Binding SchoolOrUniName}"> </TextBlock>
+            <Image Source="{StaticResource OpenBookImage}" Height="50"></Image>
+            <TextBlock Margin="50 0 0 0" FontSize="30" Foreground="Black" TextAlignment="Center" Text="{Binding SchoolOrUniName}"> </TextBlock>
         </StackPanel>
     </Grid>
 

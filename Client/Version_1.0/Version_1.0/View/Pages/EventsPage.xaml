@@ -17,8 +17,9 @@
         <vm:EventsPageVM></vm:EventsPageVM>
     </Page.DataContext>
 
-    <Grid Background="{StaticResource ImageFillingPlaceholder}" ShowGridLines="True">
+    <Grid Background="{StaticResource MainBackgroundImage}" ShowGridLines="False">
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="6*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -29,11 +30,17 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" 
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" 
+                    VerticalAlignment="Center" Margin="20" HorizontalAlignment="Center">
+            <Image Source="{StaticResource OpenBookImage}" Height="50"></Image>
+            <TextBlock Margin="50 0 0 0" FontSize="30" Foreground="Black" TextAlignment="Center" Text="{Binding SchoolOrUniName}"></TextBlock>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" 
                    VerticalAlignment="Center" FontSize="30" Text="{Binding EventsTitle}">
 
         </TextBlock>
-        <ScrollViewer Grid.Row="1" Grid.Column="1">
+        <ScrollViewer Grid.Row="2" Grid.Column="1">
             <ItemsControl x:Name="EventsItemsControl" ItemsSource="{Binding EventButtons}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

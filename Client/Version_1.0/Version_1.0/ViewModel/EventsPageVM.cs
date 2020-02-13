@@ -19,12 +19,14 @@ namespace Version_1._0.ViewModel
         private ObservableCollection<EventButton> eventButtons;
 
         public String EventsTitle { get; private set; }
+        public String SchoolOrUniName { get; private set; }
 
         public EventsPageVM()
         {
             eventButtons = new ObservableCollection<EventButton>();
             eventButtonViewModels = new List<EventButtonVM>();
             EventsTitle = "Мероприятия";
+            SchoolOrUniName = "Название учреждения";
             for (int i = 0; i < 10; i++)
             {
                 eventButtonViewModels.Add(new EventButtonVM(new Version_1._0.Model.EventInfo("Название мероприятия",
