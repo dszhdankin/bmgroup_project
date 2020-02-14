@@ -32,13 +32,15 @@ namespace BMGroupServer.Services
             }
         }
 
-        public static async Task<Class> CreateFromJson(string jsonString)
+        public static async Task<Class> CreateFromJson(string jsonString, int schoolId)
         {
             var js = new JavaScriptSerializer();
             var cls = (Class)js.Deserialize(jsonString, typeof(Class));
             using (var context = new SchoolServiceDBContext())
             {
-                context.Classes.Add(cls);
+                var school = context.Schools.Find(schoolId);
+                school.Classes.Add(cls);
+                // context.Classes.Add(cls);
                 await context.SaveChangesAsync();
             }
             return cls;
