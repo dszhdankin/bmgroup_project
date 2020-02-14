@@ -28,7 +28,11 @@ namespace Version_1._0.Model
 
             if (joj["Photo"].HasValues)
             {
-                //Photo = (byte[])joj["Photo"];
+                Photo = new byte[joj["Photo"].Count()];
+                for (int i = 0; i < Photo.Length; i++)
+                {
+                    Photo[i] = (byte)joj["Photo"][i];
+                }
             }
         }
 
