@@ -10,7 +10,7 @@ namespace BMGroupServer
 
         static void Main()
         {
-            server = new AsyncHttpServer(5, typeof(Views.PlaceholderView), typeof(Views.ClassView));
+            server = new AsyncHttpServer(5, typeof(Views.EventView), typeof(Views.ClassView));
             ServerCLI cli = new ServerCLI(server);
 
             Console.WriteLine("Available commands:\n\t" + string.Join("\n\t", ServerCLI.availableCommands));

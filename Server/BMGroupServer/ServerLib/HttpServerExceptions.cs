@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace ServerLib
+namespace Server
 {
-    class PageNotFoundException : HttpException
+    public class PageNotFoundException : HttpException
     {
         
 

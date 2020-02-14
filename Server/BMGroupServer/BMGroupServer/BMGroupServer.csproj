@@ -46,6 +46,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,7 +66,7 @@
     <Compile Include="Services\SchoolServiceDBContext.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Views\ClassView.cs" />
-    <Compile Include="Views\PlaceholderView.cs" />
+    <Compile Include="Views\EventView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
