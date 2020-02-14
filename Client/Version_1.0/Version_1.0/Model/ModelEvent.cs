@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,47 +12,63 @@ namespace Version_1._0.Model
 {
     public class EventInfo
     {
-        string name;
-        string discription;
-        DateTime date;
-
-        public EventInfo(string nam, string dis, DateTime dat)
+        public EventInfo(JToken joj)
         {
-            name = nam;
-            discription = dis;
-            date = dat;
+            if (joj["Title"].ToObject(typeof(string)) != null)
+                Title = (string)joj["Title"];
+
+            if (joj["EventId"].ToObject(typeof(int)) != null)
+                EventId = (int)joj["EventId"];
+
+            if (joj["Description"].ToObject(typeof(string)) != null)
+                Description = (string)joj["Description"];
+
+            if (joj["StartTime"].ToObject(typeof(DateTime)) != null)
+                StartTime = ((DateTime)joj["StartTime"]).ToString(System.Globalization.CultureInfo.InstalledUICulture);
+
+            if (joj["Photo"].HasValues)
+            {
+                Photo = (byte[])joj["Photo"];
+            }
         }
 
-        public string Name
-        {
-            get => name;
-        }
-
-        public string Discription
-        {
-            get => discription;
-        }
-
-        public string Date
-        {
-            get => date.ToString(System.Globalization.CultureInfo.InstalledUICulture);
-        }
+        public int EventId { get; private set; }
+        public string Description { get; private set; }
+        public string Title { get; private set; }
+        public string StartTime { get; private set; }
+        public byte[] Photo { get; private set; }
     }
 
     class ModelEvent
     {
-        public EventInfo get(string url)
-        {
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            StreamReader strm = new StreamReader(req.GetResponse().GetResponseStream());
+        string way = "event/";
 
-            return jsoneParse(strm.ReadToEnd());
+        public ObservableCollection<EventInfo> get(string url)
+        {
+            string str = "";
+            using (WebClient web = new WebClient())
+            {
+                try
+                {
+                    str = web.DownloadString(url);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return jsonEventParse(str);
         }
 
-        private EventInfo jsoneParse(string val)
+        public ObservableCollection<EventInfo> jsonEventParse(string str)
         {
-            JObject joj = JObject.Parse(val);
-            return new EventInfo((string)joj["discription"], (string)joj["name"], (DateTime)joj["time"]);
+            JObject joj = JObject.Parse("{ \"arr\":" + str + "}");
+            var list = new ObservableCollection<EventInfo>();
+
+            foreach (var token in joj.First.First)
+                list.Add(new EventInfo(token));
+            return list;
         }
     }
 }

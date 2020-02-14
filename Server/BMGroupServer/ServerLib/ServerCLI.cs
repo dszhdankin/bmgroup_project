@@ -5,8 +5,14 @@ namespace Server
 {
     public class ServerCLI
     {
-        private AsyncHttpServer server;
+        private const uint MAX_LOAD = 5;
+        private AsyncHttpServer _server;
         public static string[] availableCommands = { "help", "start" };
+        
+        public ServerCLI(AsyncHttpServer server)
+        {
+            _server = server;
+        }
 
         public async Task Parse(string command)
         {
@@ -19,11 +25,20 @@ namespace Server
                     break;
 
                 case "start":
+                    var exitEvent = new System.Threading.ManualResetEvent(false);
+
+                    Console.CancelKeyPress += (sender, eventArgs) => {      // https://stackoverflow.com/a/13899429/10679134
+                        eventArgs.Cancel = true;
+                        exitEvent.Set();
+                    };
+
                     if (words.Length > 1 && uint.TryParse(words[1], out uint port_number))
                     {
-                        server = new AsyncHttpServer(port_number);
                         await Console.Out.WriteLineAsync($"Starting a server at port {port_number}");
-                        await server.Start();
+                        _server.Port = port_number;
+                        await _server.Start();
+                        exitEvent.WaitOne();        // wait for Ctrl + C
+                        await _server.Stop();
                     }
                     else
                         Console.WriteLine("Incorrect command pattern");
@@ -34,6 +49,5 @@ namespace Server
                     break;
             }
         }
-
     }
 }
