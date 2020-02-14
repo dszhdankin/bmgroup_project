@@ -7,4 +7,5 @@
     <BitmapImage x:Key="EventsButtonImage" UriSource="pack://application:,,,/imageresources/inauguration.png"></BitmapImage>
     <BitmapImage x:Key="ScheduleButtonImage" UriSource="pack://application:,,,/imageresources/schedule.png"></BitmapImage>
     <BitmapImage x:Key="EmployeesButtonImage" UriSource="pack://application:,,,/imageresources/networking.png"></BitmapImage>
+    <BitmapImage x:Key="EmployeeButtonImage" UriSource="pack://application:,,,/imageresources/employee_image.png"></BitmapImage>
 </ResourceDictionary>

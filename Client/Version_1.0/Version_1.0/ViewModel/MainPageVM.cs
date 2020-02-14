@@ -20,10 +20,14 @@ namespace Version_1._0.ViewModel
         private string timetableTitle = "Расписание";
         private string schoolOrUniName = "Название заведения";
         public ICommand ToEventsCommand { get; private set; }
+        public ICommand ToEmployeesCommand { get; private set; }
+        public ICommand ToScheduleCommand { get; private set; }
 
         public MainPageVM()
         {
             ToEventsCommand = new RelayCommand(ToEvents);
+            ToEmployeesCommand = new RelayCommand(ToEmployees);
+            ToScheduleCommand = new RelayCommand(ToSchedule);
         }
 
         public string EmployeesTitle
@@ -79,6 +83,16 @@ namespace Version_1._0.ViewModel
         private void ToEvents(object parameter)
         {
             App.MainNavigationService.Navigate(new EventsPage());
+        }
+
+        private void ToEmployees(object parameter)
+        {
+            App.MainNavigationService.Navigate(new EmployeesPage());
+        }
+
+        private void ToSchedule(object parameter)
+        {
+            App.MainNavigationService.Navigate(new SchedulePage());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
