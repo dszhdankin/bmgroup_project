@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\ModelEvent.cs" />
+    <Compile Include="Model\ModelLesson.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="ViewModel\EventButtonVM.cs" />

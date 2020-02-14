@@ -58,7 +58,7 @@ namespace Version_1._0.Model
             JObject joj = JObject.Parse("{ \"arr\":" + str + "}");
 
             ObservableCollection<Lesson> list = new ObservableCollection<Lesson>();
-        
+
             foreach (var token in joj.First.First)
             {
                 list.Add(new Lesson((string)token["name"], (string)token["cabinet"], (DateTime)token["time"]));
