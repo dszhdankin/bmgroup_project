@@ -23,7 +23,7 @@ namespace BMGroupServer.Views
             {
                 if (context.Request.HttpMethod == "POST")
                 {
-                    var cls = await Services.ClassService.CreateFromJson(reader.ReadToEnd());
+                    var cls = await Services.ClassService.CreateFromJson(reader.ReadToEnd(), 1);
                     return cls.ClassId.ToString();
                 }
                 try
