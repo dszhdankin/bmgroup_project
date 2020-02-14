@@ -30,31 +30,34 @@ namespace Version_1._0.Model
 
     class ModelEvent
     {
+        string way = "event/";
+
         public ObservableCollection<EventInfo> get(string url)
         {
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)req.GetResponse();
-            if (response.StatusCode != HttpStatusCode.OK)
+            string str = "";
+            using (WebClient web = new WebClient())
             {
-                Console.WriteLine("StatusCode: " + response.StatusCode);
-                Console.WriteLine(response.StatusDescription);
-                return null;
+                try
+                {
+                    str = web.DownloadString(url);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-            StreamReader strm = new StreamReader(response.GetResponseStream());
 
-            string str = strm.ReadToEnd();
+            return jsonEventParse(str);
+        }
 
+        public ObservableCollection<EventInfo> jsonEventParse(string str)
+        {
             JObject joj = JObject.Parse("{ \"arr\":" + str + "}");
-
             var list = new ObservableCollection<EventInfo>();
 
             foreach (var token in joj.First.First)
-            {
-                list.Add(new EventInfo((string)token["Title"], (string)token["Description"], 
-                    (DateTime)token["StartTime"] , (byte[])token["Photo"], (int)token["EventId"]));
-            }
-
-            Console.WriteLine("Got events");
+                list.Add(new EventInfo((string)token["Title"], (string)token["Description"],
+                    (DateTime)token["StartTime"], (byte[])token["Photo"], (int)token["EventId"]));
 
             return list;
         }
