@@ -12,13 +12,24 @@ namespace Version_1._0.Model
 {
     public class EventInfo
     {
-        public EventInfo(string name, string description, DateTime date, byte[] photo, int id)
+        public EventInfo(JToken joj)
         {
-            EventId = id;
-            Photo = photo;
-            Title = name;
-            Description = description;
-            StartTime = date.ToString(System.Globalization.CultureInfo.InstalledUICulture);
+            if (joj["Title"].ToObject(typeof(string)) != null)
+                Title = (string)joj["Title"];
+
+            if (joj["EventId"].ToObject(typeof(int)) != null)
+                EventId = (int)joj["EventId"];
+
+            if (joj["Description"].ToObject(typeof(string)) != null)
+                Description = (string)joj["Description"];
+
+            if (joj["StartTime"].ToObject(typeof(DateTime)) != null)
+                StartTime = ((DateTime)joj["StartTime"]).ToString(System.Globalization.CultureInfo.InstalledUICulture);
+
+            if (joj["Photo"].HasValues)
+            {
+                Photo = (byte[])joj["Photo"];
+            }
         }
 
         public int EventId { get; private set; }
@@ -56,9 +67,7 @@ namespace Version_1._0.Model
             var list = new ObservableCollection<EventInfo>();
 
             foreach (var token in joj.First.First)
-                list.Add(new EventInfo((string)token["Title"], (string)token["Description"],
-                    (DateTime)token["StartTime"], (byte[])token["Photo"], (int)token["EventId"]));
-
+                list.Add(new EventInfo(token));
             return list;
         }
     }
