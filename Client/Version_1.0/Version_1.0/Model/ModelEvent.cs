@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,47 +12,51 @@ namespace Version_1._0.Model
 {
     public class EventInfo
     {
-        string name;
-        string discription;
-        DateTime date;
-
-        public EventInfo(string nam, string dis, DateTime dat)
+        public EventInfo(string name, string description, DateTime date, byte[] photo, int id)
         {
-            name = nam;
-            discription = dis;
-            date = dat;
+            EventId = id;
+            Photo = photo;
+            Title = name;
+            Description = description;
+            StartTime = date.ToString(System.Globalization.CultureInfo.InstalledUICulture);
         }
 
-        public string Name
-        {
-            get => name;
-        }
-
-        public string Discription
-        {
-            get => discription;
-        }
-
-        public string Date
-        {
-            get => date.ToString(System.Globalization.CultureInfo.InstalledUICulture);
-        }
+        public int EventId { get; private set; }
+        public string Description { get; private set; }
+        public string Title { get; private set; }
+        public string StartTime { get; private set; }
+        public byte[] Photo { get; private set; }
     }
 
     class ModelEvent
     {
-        public EventInfo get(string url)
+        public ObservableCollection<EventInfo> get(string url)
         {
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            StreamReader strm = new StreamReader(req.GetResponse().GetResponseStream());
+            HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                Console.WriteLine("StatusCode: " + response.StatusCode);
+                Console.WriteLine(response.StatusDescription);
+                return null;
+            }
+            StreamReader strm = new StreamReader(response.GetResponseStream());
 
-            return jsoneParse(strm.ReadToEnd());
-        }
+            string str = strm.ReadToEnd();
 
-        private EventInfo jsoneParse(string val)
-        {
-            JObject joj = JObject.Parse(val);
-            return new EventInfo((string)joj["discription"], (string)joj["name"], (DateTime)joj["time"]);
+            JObject joj = JObject.Parse("{ \"arr\":" + str + "}");
+
+            var list = new ObservableCollection<EventInfo>();
+
+            foreach (var token in joj.First.First)
+            {
+                list.Add(new EventInfo((string)token["Title"], (string)token["Description"], 
+                    (DateTime)token["StartTime"] , (byte[])token["Photo"], (int)token["EventId"]));
+            }
+
+            Console.WriteLine("Got events");
+
+            return list;
         }
     }
 }

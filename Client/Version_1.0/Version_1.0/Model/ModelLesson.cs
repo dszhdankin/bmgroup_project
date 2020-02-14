@@ -39,7 +39,7 @@ namespace Version_1._0.Model
         }
     }
 
-    class ModelLesson
+    public class ModelLesson
     {
         public static ObservableCollection<Lesson> get(string url)
         {
