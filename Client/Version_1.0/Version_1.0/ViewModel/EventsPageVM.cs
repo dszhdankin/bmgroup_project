@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using JetBrains.Annotations;
+using Version_1._0.Model;
 using Version_1._0.View.Controls;
 
 namespace Version_1._0.ViewModel
 {
     class EventsPageVM : INotifyPropertyChanged
     {
-        private List<EventButtonVM> eventButtonViewModels;
+        private ObservableCollection<EventButtonVM> eventButtonViewModels;
         private ObservableCollection<EventButton> eventButtons;
+        private ObservableCollection<EventInfo> eventInfos;
+        private ModelEvent modelEvent;
 
         public String EventsTitle { get; private set; }
         public String SchoolOrUniName { get; private set; }
@@ -24,18 +27,18 @@ namespace Version_1._0.ViewModel
         public EventsPageVM()
         {
             eventButtons = new ObservableCollection<EventButton>();
-            eventButtonViewModels = new List<EventButtonVM>();
+            eventButtonViewModels = new ObservableCollection<EventButtonVM>();
             EventsTitle = "Мероприятия";
             SchoolOrUniName = "Название учреждения";
-            for (int i = 0; i < 10; i++)
+            modelEvent = new ModelEvent();
+            eventInfos = modelEvent.get("http://localhost:8080/");
+            foreach (var curEventInfo in eventInfos)
             {
-                eventButtonViewModels.Add(new EventButtonVM(new Version_1._0.Model.EventInfo("Название мероприятия",
-                    "Это типа суперофигенное мероприятие kkkkkkkk\n kkkkkkkk \n kkkkkkkk",
-                    new DateTime(2008, 5, 1, 8, 30, 52)
-                )));
-                var button = new EventButton();
-                button.DataContext = eventButtonViewModels[i];
-                eventButtons.Add(button);
+                EventButtonVM eventButtonVm = new EventButtonVM(curEventInfo);
+                EventButton eventButton = new EventButton();
+                eventButton.DataContext = eventButtonVm;
+                eventButtonViewModels.Add(eventButtonVm);
+                eventButtons.Add(eventButton);
             }
         }
 

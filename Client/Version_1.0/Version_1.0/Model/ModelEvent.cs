@@ -28,7 +28,7 @@ namespace Version_1._0.Model
 
             if (joj["Photo"].HasValues)
             {
-                Photo = (byte[])joj["Photo"];
+                //Photo = (byte[])joj["Photo"];
             }
         }
 
@@ -50,7 +50,7 @@ namespace Version_1._0.Model
             {
                 try
                 {
-                    str = web.DownloadString(url);
+                    str = web.DownloadString(url + way);
                 }
                 catch(Exception ex)
                 {

@@ -21,17 +21,17 @@ namespace Version_1._0.ViewModel
 
         public string Description
         {
-            get => eventInfo.Discription;
+            get => eventInfo.Description;
         }
 
         public string Date
         {
-            get => eventInfo.Date;
+            get => eventInfo.StartTime;
         }
 
         public string Name
         {
-            get => eventInfo.Name;
+            get => eventInfo.Title;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
