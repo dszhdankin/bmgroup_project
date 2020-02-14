@@ -1,9 +1,11 @@
 ﻿using BMGroupServer.Models;
+using Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace BMGroupServer.Services
 {
@@ -31,19 +33,20 @@ namespace BMGroupServer.Services
             }
         }
 
-        public static async Task<Class> CreateFromJson(string jsonString)
+        public static async Task<Event> CreateFromJson(string jsonString)
         {
             var js = new JavaScriptSerializer();
+            Event evt;
             try
             {
-                var evt = (Event)js.Deserialize(jsonString, typeof(Event));
-            } catch (Exception ex)
+                evt = (Event)js.Deserialize(jsonString, typeof(Event));
+            } catch (ArgumentException ex)
             {
                 throw new PageNotFoundException("wrong JSON object format");
             }
             using (var context = new SchoolServiceDBContext())
             {
-                context.Classes.Add(evt);
+                context.Events.Add(evt);
                 await context.SaveChangesAsync();
             }
             return evt;
