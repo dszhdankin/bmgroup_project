@@ -37,13 +37,14 @@
         </StackPanel>
 
         <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" FontSize="30"/>
+                   VerticalAlignment="Center" FontSize="30" Text="{Binding EventsTitle}">
+
+        </TextBlock>
         <ScrollViewer Grid.Row="2" Grid.Column="1">
             <ItemsControl x:Name="EventsItemsControl" ItemsSource="{Binding EventButtons}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
-
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>

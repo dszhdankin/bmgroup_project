@@ -64,17 +64,8 @@
     <Compile Include="ViewModel\EventButtonVM.cs" />
     <Compile Include="ViewModel\EventsPageVM.cs" />
     <Compile Include="ViewModel\MainPageVM.cs" />
-    <Compile Include="View\Controls\Schedule.xaml.cs">
-      <DependentUpon>Schedule.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Controls\EventButton.xaml.cs">
       <DependentUpon>EventButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\EmployeeButton.xaml.cs">
-      <DependentUpon>EmployeeButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\EmployeePage.xaml.cs">
-      <DependentUpon>EmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
@@ -86,15 +77,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\Schedule.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Controls\EventButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Controls\EmployeeButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,10 +93,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Pages\EmployeePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Pages\EventsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
