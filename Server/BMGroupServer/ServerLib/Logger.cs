@@ -11,9 +11,9 @@ namespace ServerLib
 {
     class Logger
     {
-        const int BUFFER_LENGTH = 500;
-        const int MS_SLEEPING = 5000;
-        const int COUNT_OF_ERROR = 100;
+        const int BUFFER_LENGTH     = 500;
+        const int MS_SLEEPING       = 5000;
+        const int NUMBER_OF_ERRORS  = 100;
 
         ConcurrentQueue<string> logStrings = new ConcurrentQueue<string>();
         bool writeToFile;
@@ -46,18 +46,18 @@ namespace ServerLib
                 string msg;
                 using (StreamWriter sw = new StreamWriter("log.txt"))
                 {
-                    int trys = 0;
+                    int attempts = 0;
                     while (!logStrings.IsEmpty)
                     {
                         if (logStrings.TryDequeue(out msg))
                         {
-                            if (trys == COUNT_OF_ERROR)
+                            if (attempts == NUMBER_OF_ERRORS)
                                 throw new IOException("Queue is empty");
-                            trys++;
+                            attempts++;
                             Thread.Sleep(100);
                             continue;
                         }
-                        trys = 0;
+                        attempts = 0;
 
                         if (writeToConsole)
                             await Console.Out.WriteLineAsync(msg);

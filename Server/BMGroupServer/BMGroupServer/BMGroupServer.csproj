@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Model.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Program.cs" />
@@ -65,8 +66,11 @@
     <Compile Include="Services\ClassService.cs" />
     <Compile Include="Services\SchoolServiceDBContext.cs" />
     <Compile Include="Services\EventService.cs" />
+    <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\TeacherService.cs" />
     <Compile Include="Views\ClassView.cs" />
     <Compile Include="Views\EventView.cs" />
+    <Compile Include="Views\ModelView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

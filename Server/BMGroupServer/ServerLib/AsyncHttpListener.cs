@@ -78,7 +78,7 @@ namespace Server
 
         public async Task Stop()
         {
-            await Console.Out.WriteLineAsync("Stopping server...");
+            await Console.Out.WriteLineAsync("Stopping listener...");
 
             _run = false;
             if (_listener.IsListening)

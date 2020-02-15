@@ -46,12 +46,12 @@ namespace Server
         public string GetAbsoluteUrl() => absolutePrefix + rawUrl;
         public bool ValidateUrl(string rawUrl) => urlValidationPattern.IsMatch(rawUrl);
 
-        public static int GetIntArgument(string rawUrl)
+        public static int? GetIntArgument(string rawUrl)
         {
             int argument;
             if (int.TryParse(intArgTemplate.Match(rawUrl).Groups["arg"].Value, out argument))
                 return argument;
-            throw new ArgumentException($"No argument found in {rawUrl}");
+            return null;
         }
 
         public static string GetStringArgument(string rawUrl)
