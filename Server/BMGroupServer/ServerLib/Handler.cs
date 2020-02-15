@@ -17,8 +17,6 @@ namespace Server
             innerFunction = handlerLogic;
         }
 
-        // TODO: custom exceptions like UrlNotFoundException, MethodNotSupportedException, etc
-
         public async Task Handle(HttpListenerContext context, IEnumerable<ApiEndpointUrl> urls)
         {
             // before
@@ -28,11 +26,14 @@ namespace Server
             {
                 var matchingApiUrl = urls.FirstOrDefault(apiUrl => apiUrl.ValidateUrl(context.Request.RawUrl));
                 if (matchingApiUrl is null)
-                    throw new ArgumentException("URL not found");
+                    throw new PageNotFoundException();
 
                 if (!matchingApiUrl.supportedHttpMethods.Contains(context.Request.HttpMethod))
-                    throw new ArgumentException("Method not supported");
-                
+                {
+                    context.Response.Headers["Allow"] = string.Join(", ", matchingApiUrl.supportedHttpMethods);
+                    throw new MethodNotAllowedException();
+                }
+
                 // handler logic call
                 response = await innerFunction(context);
                 // after
@@ -59,7 +60,6 @@ namespace Server
                     await sw.FlushAsync();
                 }
                 var end = DateTime.Now;
-                // TODO: implement a logging system worth using
                 Console.Out.WriteLine($"{end} ({end - start}) {context.Response.StatusCode} {context.Request.HttpMethod:6} '{context.Request.Url}'");
             }
         }

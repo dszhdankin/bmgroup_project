@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BMGroupServer.Models
 {
-    public class Teacher
+    public class Teacher : Model
     {
         public int TeacherId { get; set; }
         public string Name { get; set; }

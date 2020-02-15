@@ -22,3 +22,5 @@ namespace BMGroupServer.Services
         public DbSet<Event> Events { get; set; }
     }
 }
+
+// TODO: template Service<T> class

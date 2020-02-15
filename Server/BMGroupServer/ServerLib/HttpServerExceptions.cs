@@ -8,24 +8,43 @@ using System.Web;
 
 namespace Server
 {
+    class BadRequestException : HttpException
+    {
+        public BadRequestException()
+            : this("Bad Request Exception (400)") { }
+
+        public BadRequestException(string message, Exception innerException = null)
+            : base(400, message, innerException) { }
+
+        protected BadRequestException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            HResult = 400;
+        }
+    }
+
+    class ForbiddenException : HttpException
+    {
+        public ForbiddenException()
+            : this("Forbidden Exception (403)") { }
+
+        public ForbiddenException(string message, Exception innerException = null)
+            : base(403, message, innerException) { }
+
+        protected ForbiddenException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            HResult = 403;
+        }
+    }
+
     public class PageNotFoundException : HttpException
     {
-        
+        public PageNotFoundException()
+            : this("Page Not Found (404)") { }
 
-        public PageNotFoundException() : base ("Page Not Found Exception (404)  ")
-        {
-            HResult = 404;
-        }
-
-        public PageNotFoundException(string message) : base(message)
-        {
-            HResult = 404;
-        }
-
-        public PageNotFoundException(string message, Exception innerException) : base(message, innerException)
-        {
-            HResult = 404;
-        }
+        public PageNotFoundException(string message, Exception innerException = null)
+            : base(404, message, innerException) { }
 
         protected PageNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
@@ -33,78 +52,35 @@ namespace Server
         }
     }
 
+    public class MethodNotAllowedException : HttpException
+    {
+        public MethodNotAllowedException()
+            : this("Method Not Allowed (405)") { }
+        
+        public MethodNotAllowedException(string message, Exception innerException = null)
+            : base(405, message, innerException) { }
+
+        protected MethodNotAllowedException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
+        {
+            HResult = 405;
+        }
+    }
+
     class InternalServerException : HttpException
     {
         public const int statusCode = 500;
 
-        public InternalServerException() : base("Internal Server Exception (500)")
+        public InternalServerException() 
+            : this("Internal Server Exception (500)") { }
+
+        public InternalServerException(string message, Exception innerException = null) 
+            : base(500, message, innerException) { }
+
+        protected InternalServerException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
         {
             HResult = 500;
-        }
-
-        public InternalServerException(string message) : base(message)
-        {
-            HResult = 500;
-        }
-
-        public InternalServerException(string message, Exception innerException) : base(message, innerException)
-        {
-            HResult = 500;
-        }
-
-        protected InternalServerException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            HResult = 500;
-        }
-    }
-
-    class ForbiddenException: HttpException
-    {
-        public const int statusCode = 403;
-
-        public ForbiddenException() : base ("Forbidden Exception (403)")
-        {
-            HResult = 403;
-        }
-
-        public ForbiddenException(string message) : base(message)
-        {
-            HResult = 403;
-        }
-
-        public ForbiddenException(string message, Exception innerException) : base(message, innerException)
-        {
-            HResult = 403;
-        }
-
-        protected ForbiddenException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            HResult = 403;
-        }
-    }
-
-    class BadRequestException: HttpException
-    {
-        public const int statusCode = 400;
-
-        public BadRequestException() : base("Bad Request Exception (400)")
-        {
-            HResult = 400;
-        }
-
-        public BadRequestException(string message) : base(message)
-        {
-            HResult = 400;
-        }
-
-        public BadRequestException(string message, Exception innerException) : base(message, innerException)
-        {
-            HResult = 400;
-        }
-
-        protected BadRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            HResult = 400;
         }
     }
 }
