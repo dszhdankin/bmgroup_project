@@ -43,7 +43,7 @@ namespace Version_1._0.Model
         public byte[] Photo { get; private set; }
     }
 
-    class ModelEvent
+    public class ModelEvent
     {
         string way = "event/";
 
