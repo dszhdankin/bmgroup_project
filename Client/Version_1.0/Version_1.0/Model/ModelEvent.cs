@@ -59,6 +59,7 @@ namespace Version_1._0.Model
                 catch(Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    return null;
                 }
             }
 

@@ -23,6 +23,7 @@ namespace UnitTestFront
             Assert.AreEqual(mas[1].Title, "Go home");
             Assert.AreEqual(mas[0].EventId, 1);
             Assert.AreEqual(mas[1].EventId, 3);
+
         }
         string str = "[{\"EventId\":1,\"Description\":\"nothing\",\"Title\":\"Nothing\"," +
             "\"StartTime\":\"\\/Date(-2208962400000)\\/\",\"Photo\":null}," +
