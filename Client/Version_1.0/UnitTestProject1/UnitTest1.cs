@@ -12,7 +12,7 @@ namespace UnitTestFront
         {
             ModelEvent a = new ModelEvent();
             a.get("http://localhost:8080/");
-            a.get("");
+            //a.get("");
 
             var mas = a.jsonEventParse(str);
 
