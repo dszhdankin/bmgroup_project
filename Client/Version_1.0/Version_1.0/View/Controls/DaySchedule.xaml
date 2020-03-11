@@ -16,9 +16,9 @@
                 <ListView ItemsSource ="{Binding LessonList}" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="70" Header="Начало"></GridViewColumn>
-                            <GridViewColumn Width="200" Header="Предмет"></GridViewColumn>
-                            <GridViewColumn Width="70" Header="Аудитория"></GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}"  Width="70" Header="Начало"></GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="200" Header="Предмет"></GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cabinet}" Width="70" Header="Аудитория"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

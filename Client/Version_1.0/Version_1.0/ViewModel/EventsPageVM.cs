@@ -16,10 +16,10 @@ namespace Version_1._0.ViewModel
 {
     class EventsPageVM : INotifyPropertyChanged
     {
-        private ObservableCollection<EventButtonVM> eventButtonViewModels;
-        private ObservableCollection<EventButton> eventButtons;
-        private ObservableCollection<EventInfo> eventInfos;
-        private ModelEvent modelEvent;
+        private ObservableCollection<EventButtonVM> eventButtonViewModels = null;
+        private ObservableCollection<EventButton> eventButtons = null;
+        private ObservableCollection<EventInfo> eventInfos = null;
+        private ModelEvent modelEvent = null;
 
         public String EventsTitle { get; private set; }
         public String SchoolOrUniName { get; private set; }
@@ -32,6 +32,8 @@ namespace Version_1._0.ViewModel
             SchoolOrUniName = "Название учреждения";
             modelEvent = new ModelEvent();
             eventInfos = modelEvent.get("http://localhost:8080/");
+            if (eventInfos == null)
+                return;
             foreach (var curEventInfo in eventInfos)
             {
                 EventButtonVM eventButtonVm = new EventButtonVM(curEventInfo);

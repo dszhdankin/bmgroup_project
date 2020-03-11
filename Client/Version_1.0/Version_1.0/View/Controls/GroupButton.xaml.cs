@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Version_1._0.ViewModel;
 
-namespace Version_1._0.View.Pages
+namespace Version_1._0.View.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для SchedulePage.xaml
+    /// Логика взаимодействия для GroupButton.xaml
     /// </summary>
-    public partial class SchedulePage : Page
+    public partial class GroupButton : UserControl
     {
-        public SchedulePage()
+        public GroupButton()
         {
             InitializeComponent();
-            this.DataContext = new SchedulePageVM(this);
         }
     }
 }

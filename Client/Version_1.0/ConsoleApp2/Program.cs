@@ -10,6 +10,9 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
+            DateTime dateTime = new DateTime();
+            Console.WriteLine(dateTime.ToString(System.Globalization.CultureInfo.InstalledUICulture));
+
         }
     }
 }

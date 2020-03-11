@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
     </UserControl.Resources>
-    <Button Background="{StaticResource EventBackGround}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+    <Button Background="{Binding BackgroundImage}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
         <Grid ShowGridLines="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>

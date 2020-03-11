@@ -68,7 +68,10 @@
     <Compile Include="ViewModel\EmployeesPageVM.cs" />
     <Compile Include="ViewModel\EventButtonVM.cs" />
     <Compile Include="ViewModel\EventsPageVM.cs" />
+    <Compile Include="ViewModel\LessonVM.cs" />
     <Compile Include="ViewModel\MainPageVM.cs" />
+    <Compile Include="ViewModel\SchedulePageVM.cs" />
+    <Compile Include="ViewModel\SchoolScheduleVM.cs" />
     <Compile Include="View\Controls\DaySchedule.xaml.cs">
       <DependentUpon>DaySchedule.xaml</DependentUpon>
     </Compile>
@@ -77,6 +80,9 @@
     </Compile>
     <Compile Include="View\Controls\EventButton.xaml.cs">
       <DependentUpon>EventButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\GroupButton.xaml.cs">
+      <DependentUpon>GroupButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
@@ -103,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Controls\EventButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\GroupButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

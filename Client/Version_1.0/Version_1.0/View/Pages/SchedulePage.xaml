@@ -46,11 +46,11 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         
-        <uc:DaySchedule Grid.Row="3" Grid.Column="1"></uc:DaySchedule>
-        <uc:DaySchedule Grid.Row="3" Grid.Column="2"></uc:DaySchedule>
-        <uc:DaySchedule Grid.Row="3" Grid.Column="3"></uc:DaySchedule>
-        <uc:DaySchedule Grid.Row="4" Grid.Column="1"></uc:DaySchedule>
-        <uc:DaySchedule Grid.Row="4" Grid.Column="2"></uc:DaySchedule>
-        <uc:DaySchedule Grid.Row="4" Grid.Column="3"></uc:DaySchedule>
+        <uc:DaySchedule x:Name="Monday" Grid.Row="3" Grid.Column="1"></uc:DaySchedule>
+        <uc:DaySchedule x:Name="Tuesday" Grid.Row="3" Grid.Column="2"></uc:DaySchedule>
+        <uc:DaySchedule x:Name="Wednesday" Grid.Row="3" Grid.Column="3"></uc:DaySchedule>
+        <uc:DaySchedule x:Name="Thursday"  Grid.Row="4" Grid.Column="1"></uc:DaySchedule>
+        <uc:DaySchedule x:Name="Friday" Grid.Row="4" Grid.Column="2"></uc:DaySchedule>
+        <uc:DaySchedule x:Name="Saturday" Grid.Row="4" Grid.Column="3"></uc:DaySchedule>
     </Grid>
 </Page>

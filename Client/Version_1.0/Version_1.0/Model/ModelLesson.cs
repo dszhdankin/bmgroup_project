@@ -35,7 +35,8 @@ namespace Version_1._0.Model
 
         public string Date
         {
-            get => date.ToString(System.Globalization.CultureInfo.InstalledUICulture);
+            get => (date.Hour / 10 % 10).ToString() + (date.Hour % 10) + ":" + (date.Minute / 10 % 10) +
+                   (date.Minute % 10);
         }
     }
 
