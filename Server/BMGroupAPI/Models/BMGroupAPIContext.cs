@@ -17,7 +17,19 @@ namespace BMGroupAPI.Models
     
         public BMGroupAPIContext() : base("name=BMGroupAPIContext")
         {
+           
+
+            Database.Initialize(false);
+
         }
+
+        static BMGroupAPIContext()
+        {
+           
+            Database.SetInitializer(new DropCreateDatabaseAlways<BMGroupAPIContext>());
+            
+        }
+        
 
         public System.Data.Entity.DbSet<BMGroupAPI.Models.Organization> Organizations { get; set; }
 
