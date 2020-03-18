@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace Version_1._0
 {
@@ -16,5 +17,7 @@ namespace Version_1._0
     {
         public static NavigationService MainNavigationService =>
             (App.Current.MainWindow as MainWindow).Frame.NavigationService;
+
+        public static Dispatcher UiDispatcher;
     }
 }

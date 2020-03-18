@@ -49,5 +49,6 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
+        <Button Grid.Row="3" Grid.Column="0" Command="{Binding UpdateCommand}"> Update </Button>
     </Grid>
 </Page>

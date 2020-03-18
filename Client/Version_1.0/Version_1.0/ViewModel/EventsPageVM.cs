@@ -2,38 +2,47 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using JetBrains.Annotations;
 using Version_1._0.Model;
+using Version_1._0.Utilities;
 using Version_1._0.View.Controls;
+using System.Windows.Threading;
 
 namespace Version_1._0.ViewModel
 {
     class EventsPageVM : INotifyPropertyChanged
     {
+        //Just a delegate to call methods asynchronously
+        private delegate void AsyncCaller();
+
+        private delegate void UpdateUICaller(ObservableCollection<EventInfo> argument);
+
         private ObservableCollection<EventButtonVM> eventButtonViewModels = null;
         private ObservableCollection<EventButton> eventButtons = null;
         private ObservableCollection<EventInfo> eventInfos = null;
         private ModelEvent modelEvent = null;
+        private Timer timer;
 
-        public String EventsTitle { get; private set; }
-        public String SchoolOrUniName { get; private set; }
-
-        public EventsPageVM()
+        private void FetchServerData()
         {
-            eventButtons = new ObservableCollection<EventButton>();
-            eventButtonViewModels = new ObservableCollection<EventButtonVM>();
-            EventsTitle = "Мероприятия";
-            SchoolOrUniName = "Название учреждения";
-            modelEvent = new ModelEvent();
-            eventInfos = modelEvent.get("http://localhost:8080/");
-            if (eventInfos == null)
-                return;
+            ObservableCollection<EventInfo> buffer = modelEvent.get("http://localhost:8080/");
+            App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal, new UpdateUICaller(UpdateUI), buffer);
+        }
+
+        private void UpdateUI(ObservableCollection<EventInfo> buffer)
+        {
+            if (buffer == null)
+                eventInfos = new ObservableCollection<EventInfo>();
+            eventInfos = buffer;
             foreach (var curEventInfo in eventInfos)
             {
                 EventButtonVM eventButtonVm = new EventButtonVM(curEventInfo);
@@ -43,6 +52,29 @@ namespace Version_1._0.ViewModel
                 eventButtons.Add(eventButton);
             }
         }
+
+        private void Update(object parameter)
+        {
+            AsyncCaller fetcher = new AsyncCaller(FetchServerData);
+            fetcher.BeginInvoke(null, null);
+        }
+
+        public String EventsTitle { get; private set; }
+        public String SchoolOrUniName { get; private set; }
+        public ICommand UpdateCommand { get; set; }
+
+        public EventsPageVM()
+        {
+            eventButtons = new ObservableCollection<EventButton>();
+            eventButtonViewModels = new ObservableCollection<EventButtonVM>();
+            EventsTitle = "Мероприятия";
+            SchoolOrUniName = "Название учреждения";
+            modelEvent = new ModelEvent();
+            eventInfos = new ObservableCollection<EventInfo>();
+            UpdateCommand = new RelayCommand(Update);
+        }
+
+        
 
         public ObservableCollection<EventButton> EventButtons
         {

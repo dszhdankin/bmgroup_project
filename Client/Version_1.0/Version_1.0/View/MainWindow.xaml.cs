@@ -25,6 +25,7 @@ namespace Version_1._0
         {
             InitializeComponent();
             App.MainNavigationService.Navigate(new MainPage());
+            App.UiDispatcher = this.Dispatcher;
         }
 
     }
