@@ -42,7 +42,11 @@ namespace Version_1._0.ViewModel
         {
             if (buffer == null)
                 eventInfos = new ObservableCollection<EventInfo>();
-            eventInfos = buffer;
+            else
+                eventInfos = buffer;
+
+            eventButtonViewModels.Clear();
+            eventButtons.Clear();
             foreach (var curEventInfo in eventInfos)
             {
                 EventButtonVM eventButtonVm = new EventButtonVM(curEventInfo);
