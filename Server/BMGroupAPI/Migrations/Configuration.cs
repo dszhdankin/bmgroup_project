@@ -44,38 +44,55 @@
                 new Ellective() {
                     Info = "ZXCVBN",
                     Time = new DateTime(2020,10, 10, 10, 10, 10),
-                    Title = "Usless Ellective"
+                    Title = "Usуless Ellective"
                 }
             };
 
-            Lesson[] lessons = {
-                new Lesson() {
+            Lesson[] lessons = new Lesson[30];
+
+            for (int day = 0; day < 6; ++day)
+            {
+                lessons[day * 5] = new Lesson()
+                {
                     ClassId = 1,
                     Info = "Math",
-                    Time = new DateTime(2020, 1,12,9, 00, 00)
-                },
-                new Lesson() {
+                    Time = new DateTime(2020, 3 + day, 23, 9, 0, 0)
+                };
+                lessons[day * 5 + 1] = new Lesson()
+                {
                     ClassId = 1,
-                    Info = "Language",
-                    Time = new DateTime(2020, 1, 12, 10, 30, 00)
-                },
-                new Lesson() {
-                    ClassId = 1,
-                    Info = "Prigramming",
-                    Time = new DateTime(2020, 1, 12, 12, 00 , 00)
-                },
-                new Lesson() {
+                    Info = "English",
+                    Time = new DateTime(2020, 3 + day, 23, 10, 30, 0)
+                };
+                lessons[day * 5 + 2] = new Lesson()
+                {
                     ClassId = 1,
                     Info = "Programming",
-                    Time = new DateTime(2020, 1, 12, 13, 30, 00)
-                },
-                new Lesson() {
+                    Time = new DateTime(2020, 3 + day, 23, 12, 0, 0)
+                };
+                lessons[day * 5 + 3] = new Lesson()
+                {
+                    ClassId = 1,
+                    Info = "Programming",
+                    Time = new DateTime(2020, 3 + day, 23, 13, 30, 0)
+                };
+                lessons[day * 5 + 4] = new Lesson()
+                {
                     ClassId = 1,
                     Info = "Art",
-                    Time = new DateTime(2020, 1, 12, 15, 00, 00)
-                }
+                    Time = new DateTime(2020, 3 + day, 23, 15, 0, 0)
+                };
+            }
+            /*
+            int day = 0;
+            Lesson[] lessons = new Lesson[1];
+            lessons[0] = new Lesson()
+            {
+                ClassId = 1,
+                Info = "Math",
+                Time = new DateTime(2020, 3 + day, 23, 9, 0, 0)
             };
-
+            */
             Class[] classes = {
                     new Class() {
                         Title = "11A"
