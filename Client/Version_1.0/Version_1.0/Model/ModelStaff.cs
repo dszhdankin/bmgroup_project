@@ -17,6 +17,14 @@ namespace Version_1._0.Model
         public string Photo { get; set; }
         public string Info { get; set; }
 
+        public byte[] getBytePhoto()
+        {
+            if (Photo != "QEA=")
+                return Encoding.Default.GetBytes(Photo);
+            else
+                return null;
+        }
+
         public override string getWay()
         {
             return "Employees/";

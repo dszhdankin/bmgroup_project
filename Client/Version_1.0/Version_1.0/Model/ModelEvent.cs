@@ -11,13 +11,21 @@ using System.Web.Script.Serialization;
 
 namespace Version_1._0.Model
 {
-    public class EventInfo : ModelItem
+    public class Event : ModelItem
     {
         public int EventId { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }
         public DateTime StartTime { get; set; }
         public string Photo { get; set; }
+
+        public byte[] getBytePhoto()
+        {
+            if (Photo != "QEA=")
+                return Encoding.Default.GetBytes(Photo);
+            else
+                return null;
+        }
 
         public override string getWay()
         {
