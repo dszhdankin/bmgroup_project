@@ -7,73 +7,23 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Web.Script.Serialization;
 
 namespace Version_1._0.Model
 {
-    public class EventInfo
+    public class EventInfo : ModelItem
     {
-        public EventInfo(JToken joj)
+        public int EventId { get; set; }
+        public string Description { get; set; }
+        public string Title { get; set; }
+        public DateTime StartTime { get; set; }
+        public string Photo { get; set; }
+
+        public override string getWay()
         {
-            if (joj["Title"].ToObject(typeof(string)) != null)
-                Title = (string)joj["Title"];
-
-            if (joj["EventId"].ToObject(typeof(int)) != null)
-                EventId = (int)joj["EventId"];
-
-            if (joj["Description"].ToObject(typeof(string)) != null)
-                Description = (string)joj["Description"];
-
-            if (joj["StartTime"].ToObject(typeof(DateTime)) != null)
-                StartTime = ((DateTime)joj["StartTime"]).ToString(System.Globalization.CultureInfo.InstalledUICulture);
-
-            if (joj["Photo"].HasValues)
-            {
-                Photo = new byte[joj["Photo"].Count()];
-                for (int i = 0; i < Photo.Length; i++)
-                {
-                    Photo[i] = (byte)joj["Photo"][i];
-                }
-            }
+            return "Events/";
         }
-
-        public int EventId { get; private set; }
-        public string Description { get; private set; }
-        public string Title { get; private set; }
-        public string StartTime { get; private set; }
-        public byte[] Photo { get; private set; }
     }
 
-    public class ModelEvent
-    {
-        string way = "event/";
-
-        public ObservableCollection<EventInfo> get(string url)
-        {
-            string str = "";
-            using (WebClient web = new WebClient())
-            {
-                try
-                {
-                    str = web.DownloadString(url + way);
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return null;
-                }
-            }
-
-            return jsonEventParse(str);
-        }
-
-        public ObservableCollection<EventInfo> jsonEventParse(string str)
-        {
-            JObject joj = JObject.Parse("{ \"arr\":" + str + "}");
-            var list = new ObservableCollection<EventInfo>();
-
-            foreach (var token in joj.First.First)
-                list.Add(new EventInfo(token));
-            return list;
-        }
-    }
+   
 }

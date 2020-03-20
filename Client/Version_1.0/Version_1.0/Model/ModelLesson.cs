@@ -10,61 +10,16 @@ using Newtonsoft.Json.Linq;
 
 namespace Version_1._0.Model
 {
-    public class Lesson
+    public class Lesson : ModelItem
     {
-        string name;
-        DateTime date;
-        string cabinetNumber;
+        public int LessonId { get; set; }
+        public int ClassId { get; set; }
+        public string Info { get; set; }
+        public DateTime Time { get; set; }
 
-        public Lesson(string nam, string cab, DateTime dat)
+        public override string getWay()
         {
-            name = nam;
-            cabinetNumber = cab;
-            date = dat;
-        }
-
-        public string Name
-        {
-            get => name;
-        }
-
-        public string Cabinet
-        {
-            get => cabinetNumber;
-        }
-
-        public string Date
-        {
-            get => (date.Hour / 10 % 10).ToString() + (date.Hour % 10) + ":" + (date.Minute / 10 % 10) +
-                   (date.Minute % 10);
-        }
-    }
-
-    public class ModelLesson
-    {
-        public static ObservableCollection<Lesson> get(string url)
-        {
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)req.GetResponse();
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                Console.WriteLine("StatusCode: " + response.StatusCode);
-                Console.WriteLine(response.StatusDescription);
-                return null;
-            }
-            StreamReader strm = new StreamReader(response.GetResponseStream());
-
-            string str = strm.ReadToEnd();
-
-            JObject joj = JObject.Parse("{ \"arr\":" + str + "}");
-
-            ObservableCollection<Lesson> list = new ObservableCollection<Lesson>();
-
-            foreach (var token in joj.First.First)
-            {
-                list.Add(new Lesson((string)token["name"], (string)token["cabinet"], (DateTime)token["time"]));
-            }
-            return list;
+            return "Lessons/";
         }
     }
 }
