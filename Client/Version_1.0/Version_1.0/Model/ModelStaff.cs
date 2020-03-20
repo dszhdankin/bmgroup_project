@@ -14,7 +14,7 @@ namespace Version_1._0.Model
     {
         public int EmployeeId { get; set; }
         public string Name { get; set; }
-        public byte[] Photo { get; set; }
+        public string Photo { get; set; }
         public string Info { get; set; }
 
         public override string getWay()
