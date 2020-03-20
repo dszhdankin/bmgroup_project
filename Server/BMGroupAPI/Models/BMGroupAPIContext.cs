@@ -17,17 +17,12 @@ namespace BMGroupAPI.Models
     
         public BMGroupAPIContext() : base("name=BMGroupAPIContext")
         {
-           
-
             Database.Initialize(false);
-
         }
 
         static BMGroupAPIContext()
-        {
-           
-            Database.SetInitializer(new DropCreateDatabaseAlways<BMGroupAPIContext>());
-            
+        {  
+            Database.SetInitializer(new CreateDatabaseIfNotExists<BMGroupAPIContext>());   
         }
         
 
