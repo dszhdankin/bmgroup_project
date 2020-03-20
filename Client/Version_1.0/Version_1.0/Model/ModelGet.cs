@@ -14,7 +14,7 @@ namespace Version_1._0.Model
         public abstract string getWay();
     }
 
-    class ModelGet<T> where T : ModelItem, new()
+    public class ModelGet<T> where T : ModelItem, new()
     {
         public ObservableCollection<T> get(string url)
         {
@@ -38,15 +38,21 @@ namespace Version_1._0.Model
 
         public ObservableCollection<T> jsonEventParse(string str)
         {
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            T[] result = js.Deserialize<T[]>(str);
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                T[] result = js.Deserialize<T[]>(str);
 
-            var list = new ObservableCollection<T>();
+                var list = new ObservableCollection<T>();
 
-            foreach (var item in result)
-                list.Add(item);
-            return list;
+                foreach (var item in result)
+                    list.Add(item);
+                return list;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
     }
-}
 }
