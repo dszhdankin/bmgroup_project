@@ -13,26 +13,44 @@ namespace Version_1._0.ViewModel
 {
     class LessonVM : INotifyPropertyChanged
     {
-        private ObservableCollection<Lesson> lessonList = null;
+        private ObservableCollection<SingleLessonVM> lessonList = null;
 
         public string DayOfWeek { get; private set; }
 
-        public ObservableCollection<Lesson> LessonList
+        public ObservableCollection<SingleLessonVM> LessonList
         {
             get => lessonList;
         }
 
-        public LessonVM(string dayOfWeek, bool slave)
+        public LessonVM(DayOfWeek dayOfWeek, ObservableCollection<Lesson> allLessons)
         {
-            DayOfWeek = dayOfWeek;
-            string name = "master", cab = "cab";
-            if (slave)
-                name = "slave";
-            lessonList = new ObservableCollection<Lesson>();
-            for (int i = 0; i < 5; i++)
+            var query = from lesson in allLessons
+                where lesson.Time.DayOfWeek == dayOfWeek
+                select lesson;
+            lessonList = new ObservableCollection<SingleLessonVM>();
+            foreach (var lesson in query)
             {
-                Lesson lesson = new Lesson(name, cab, new DateTime());
-                lessonList.Add(lesson);
+                lessonList.Add(new SingleLessonVM(lesson));
+            }
+            switch (dayOfWeek)
+            {
+                case System.DayOfWeek.Monday: DayOfWeek = "Понедельник";
+                    break;
+                case System.DayOfWeek.Tuesday:
+                    DayOfWeek = "Вторник";
+                    break;
+                case System.DayOfWeek.Wednesday:
+                    DayOfWeek = "Среда";
+                    break;
+                case System.DayOfWeek.Thursday:
+                    DayOfWeek = "Четверг";
+                    break;
+                case System.DayOfWeek.Friday:
+                    DayOfWeek = "Пятница";
+                    break;
+                case System.DayOfWeek.Saturday:
+                    DayOfWeek = "Суббота";
+                    break;
             }
         }
 

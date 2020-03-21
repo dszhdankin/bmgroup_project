@@ -24,24 +24,24 @@ namespace Version_1._0.ViewModel
         //Just a delegate to call methods asynchronously
         private delegate void AsyncCaller();
 
-        private delegate void UpdateUICaller(ObservableCollection<EventInfo> argument);
+        private delegate void UpdateUICaller(ObservableCollection<Event> argument);
 
         private ObservableCollection<EventButtonVM> eventButtonViewModels = null;
         private ObservableCollection<EventButton> eventButtons = null;
-        private ObservableCollection<EventInfo> eventInfos = null;
-        private ModelEvent modelEvent = null;
+        private ObservableCollection<Event> eventInfos = null;
+        private ModelGet<Event> modelGet = null;
         private Timer timer;
 
         private void FetchServerData()
         {
-            ObservableCollection<EventInfo> buffer = modelEvent.get("http://localhost:8080/");
+            ObservableCollection<Event> buffer = modelGet.get(App.SERVER_NAME);
             App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal, new UpdateUICaller(UpdateUI), buffer);
         }
 
-        private void UpdateUI(ObservableCollection<EventInfo> buffer)
+        private void UpdateUI(ObservableCollection<Event> buffer)
         {
             if (buffer == null)
-                eventInfos = new ObservableCollection<EventInfo>();
+                eventInfos = new ObservableCollection<Event>();
             else
                 eventInfos = buffer;
 
@@ -73,8 +73,8 @@ namespace Version_1._0.ViewModel
             eventButtonViewModels = new ObservableCollection<EventButtonVM>();
             EventsTitle = "Мероприятия";
             SchoolOrUniName = "Название учреждения";
-            modelEvent = new ModelEvent();
-            eventInfos = new ObservableCollection<EventInfo>();
+            modelGet = new ModelGet<Event>();
+            eventInfos = new ObservableCollection<Event>();
             UpdateCommand = new RelayCommand(Update);
         }
 

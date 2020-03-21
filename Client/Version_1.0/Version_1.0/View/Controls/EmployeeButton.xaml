@@ -17,7 +17,7 @@
                 <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <Image Source="{StaticResource EmployeeButtonImage}" Grid.Row="0" Stretch="Fill">
+            <Image Source="{Binding Photo}" Grid.Row="0" Stretch="Fill">
                 
             </Image>
             <TextBlock x:Name="Surname" Text ="{Binding Name}" Grid.Row="1" Foreground="Black"/>

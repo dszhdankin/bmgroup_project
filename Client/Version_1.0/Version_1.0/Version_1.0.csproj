@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,6 +60,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ModelClass.cs" />
+    <Compile Include="Model\ModelEllectives.cs" />
+    <Compile Include="Model\ModelGet.cs" />
+    <Compile Include="Model\ModelOrganization.cs" />
     <Compile Include="Model\ModelStaff.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="Model\ModelEvent.cs" />
@@ -72,6 +77,7 @@
     <Compile Include="ViewModel\MainPageVM.cs" />
     <Compile Include="ViewModel\SchedulePageVM.cs" />
     <Compile Include="ViewModel\SchoolScheduleVM.cs" />
+    <Compile Include="ViewModel\SingleLessonVM.cs" />
     <Compile Include="View\Controls\DaySchedule.xaml.cs">
       <DependentUpon>DaySchedule.xaml</DependentUpon>
     </Compile>

@@ -38,13 +38,18 @@
         <TextBlock FontSize="30" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Text="Расписание" 
                    VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
-        <ItemsControl x:Name="EventsItemsControl" ItemsSource="{Binding GroupButtons}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" 
+                      HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl x:Name="EventsItemsControl" ItemsSource="{Binding GroupButtons}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
+        
         
         <uc:DaySchedule x:Name="Monday" Grid.Row="3" Grid.Column="1"></uc:DaySchedule>
         <uc:DaySchedule x:Name="Tuesday" Grid.Row="3" Grid.Column="2"></uc:DaySchedule>
@@ -52,5 +57,6 @@
         <uc:DaySchedule x:Name="Thursday"  Grid.Row="4" Grid.Column="1"></uc:DaySchedule>
         <uc:DaySchedule x:Name="Friday" Grid.Row="4" Grid.Column="2"></uc:DaySchedule>
         <uc:DaySchedule x:Name="Saturday" Grid.Row="4" Grid.Column="3"></uc:DaySchedule>
+        <Button Grid.Row="5" Grid.Column="0" Command="{Binding UpdateCommand}"> Update </Button>
     </Grid>
 </Page>

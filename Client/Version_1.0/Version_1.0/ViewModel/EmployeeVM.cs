@@ -2,55 +2,61 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using JetBrains.Annotations;
+using Version_1._0.Model;
 
 namespace Version_1._0.ViewModel
 {
     class EmployeeVM : INotifyPropertyChanged
     {
-        private string _name, _position, _description;
+        private Employee employee;
 
-        public EmployeeVM(string name, string position, string description)
+        public EmployeeVM(Employee employee)
         {
-            _name = name;
-            _position = position;
-            _description = description;
+            this.employee = employee;
         }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name
         {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged();
-            }
+            get => employee.Name;
         }
 
         public string Position
         {
-            get => _position;
-            set
-            {
-                _position = value;
-                OnPropertyChanged();
-            }
+            get => "Не предусмотренно бэкэндом";
         }
 
         public string Description
         {
-            get => _description;
-            set
+            get => employee.Info;
+        }
+
+        public ImageBrush Photo
+        {
+            get
             {
-                _description = value;
-                OnPropertyChanged();
-            } 
+                ImageBrush brush = new ImageBrush();
+                using (MemoryStream stream = new MemoryStream(employee.getBytePhoto()))
+                {
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.StreamSource = stream;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.EndInit();
+                    image.Freeze();
+                    brush.ImageSource = image;
+                }
+                return brush;
+            }
         }
 
         [NotifyPropertyChangedInvocator]

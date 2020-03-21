@@ -15,9 +15,9 @@ namespace Version_1._0.ViewModel
 {
     class EventButtonVM : INotifyPropertyChanged
     {
-        private EventInfo eventInfo;
+        private Event eventInfo;
 
-        public EventButtonVM(EventInfo eventInfo)
+        public EventButtonVM(Event eventInfo)
         {
             this.eventInfo = eventInfo;
         }
@@ -29,7 +29,7 @@ namespace Version_1._0.ViewModel
 
         public string Date
         {
-            get => eventInfo.StartTime;
+            get => eventInfo.StartTime.ToString();
         }
 
         public string Name
@@ -42,7 +42,7 @@ namespace Version_1._0.ViewModel
             get
             {
                 ImageBrush brush = new ImageBrush();
-                using (MemoryStream stream = new MemoryStream(eventInfo.Photo))
+                using (MemoryStream stream = new MemoryStream(eventInfo.getBytePhoto()))
                 {
                     BitmapImage image = new BitmapImage();
                     image.BeginInit();

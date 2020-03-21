@@ -6,42 +6,70 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Threading;
 using JetBrains.Annotations;
+using Version_1._0.Model;
+using Version_1._0.Utilities;
 using Version_1._0.View.Controls;
 
 namespace Version_1._0.ViewModel
 {
     class EmployeesPageVM : INotifyPropertyChanged
     {
-        private List<EmployeeVM> employeeVms;
-        private ObservableCollection<EmployeeButton> employees;
+        private delegate void AsyncCaller();
+
+        private delegate void UpdateUICaller(ObservableCollection<Employee> argument);
+
+        private List<EmployeeVM> employeeVms = null;
+        private ObservableCollection<EmployeeButton> employeeButtons = null;
+        private ModelGet<Employee> modelGet = null;
+
+        private void FetchServerData()
+        {
+            ObservableCollection<Employee> buffer = modelGet.get(App.SERVER_NAME);
+            App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal, new UpdateUICaller(UpdateUI), buffer);
+        }
+
+        private void UpdateUI(ObservableCollection<Employee> buffer)
+        {
+            employeeVms.Clear();
+            employeeButtons.Clear();
+            if (buffer == null)
+                return;
+            foreach (var curEmployee in buffer)
+            {
+                EmployeeVM employeeVm = new EmployeeVM(curEmployee);
+                EmployeeButton employeeButton = new EmployeeButton();
+                employeeButton.DataContext = employeeVm;
+                employeeVms.Add(employeeVm);
+                employeeButtons.Add(employeeButton);
+            }
+        }
+
+        private void Update(object parameter)
+        {
+            AsyncCaller fetcher = new AsyncCaller(FetchServerData);
+            fetcher.BeginInvoke(null, null);
+        }
 
         public String EmployeesTitle { get; private set; }
         public String SchoolOrUniName { get; private set; }
 
+        public ICommand UpdateCommand { get; private set; }
+
         public EmployeesPageVM()
         {
-            employees = new ObservableCollection<EmployeeButton>();
+            employeeButtons = new ObservableCollection<EmployeeButton>();
             employeeVms = new List<EmployeeVM>();
+            modelGet = new ModelGet<Employee>();
+            UpdateCommand = new RelayCommand(Update);
             EmployeesTitle = "Сотрудники";
-            SchoolOrUniName = "Название учреждения";
-            for (int i = 0; i < 10; i++)
-            {
-                employeeVms.Add(new EmployeeVM("Имя", "Должность", "Описание"));
-                var button = new EmployeeButton();
-                button.DataContext = employeeVms[i];
-                employees.Add(button);
-            }
         }
 
         public ObservableCollection<EmployeeButton> EmployeeButtons
         {
-            get => employees;
-            set
-            {
-                employees = value;
-                OnPropertyChanged();
-            }
+            get => employeeButtons;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -11,11 +11,14 @@ using JetBrains.Annotations;
 using Version_1._0.Model;
 using Version_1._0.Utilities;
 using Version_1._0.View.Controls;
+using Version_1._0.View.Pages;
 
 namespace Version_1._0.ViewModel
 {
     class SchoolScheduleVM : INotifyPropertyChanged
     {
+        private Class clas;
+
         private LessonVM _monday, _tuesday, _wednesday, _thursday, _friday, _saturday;
 
         private DaySchedule _mondayView,
@@ -35,26 +38,28 @@ namespace Version_1._0.ViewModel
             _saturdayView.DataContext = _saturday;
         }
 
-        public string Name { get; private set; }
+        public string Name
+        {
+            get => clas.Title;
+        }
 
         public ICommand ChangeContextCommand { get; private set; }
 
-        public SchoolScheduleVM(string name, bool slave, DaySchedule monday, DaySchedule tuesday, 
-            DaySchedule wednesday, DaySchedule thursday, DaySchedule friday, DaySchedule saturday)
+        public SchoolScheduleVM(Class clas, ObservableCollection<Lesson> lessons, SchedulePage schedulePage)
         {
-            Name = name;
-            _monday = new LessonVM("Понедельник", slave);
-            _tuesday = new LessonVM("Вторник", slave);
-            _wednesday = new LessonVM("Среда", slave);
-            _thursday = new LessonVM("Четверг", slave);
-            _friday = new LessonVM("Пятница", slave);
-            _saturday = new LessonVM("Суббота", slave);
-            _mondayView = monday;
-            _tuesdayView = tuesday;
-            _wednesdayView = wednesday;
-            _thursdayView = thursday;
-            _fridayView = friday;
-            _saturdayView = saturday;
+            this.clas = clas;
+            _monday = new LessonVM(DayOfWeek.Monday, lessons);
+            _tuesday = new LessonVM(DayOfWeek.Tuesday, lessons);
+            _wednesday = new LessonVM(DayOfWeek.Wednesday, lessons);
+            _thursday = new LessonVM(DayOfWeek.Thursday, lessons);
+            _friday = new LessonVM(DayOfWeek.Friday, lessons);
+            _saturday = new LessonVM(DayOfWeek.Saturday, lessons);
+            _mondayView = schedulePage.Monday;
+            _tuesdayView = schedulePage.Tuesday;
+            _wednesdayView = schedulePage.Wednesday;
+            _thursdayView = schedulePage.Thursday;
+            _fridayView = schedulePage.Friday;
+            _saturdayView = schedulePage.Saturday;
             ChangeContextCommand = new RelayCommand(ChangeContext);
         }
 
