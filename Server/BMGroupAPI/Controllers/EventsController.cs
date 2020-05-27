@@ -17,10 +17,25 @@ namespace BMGroupAPI.Controllers
     {
         private BMGroupAPIContext db = new BMGroupAPIContext();
 
-        // GET: api/Events
-        public IQueryable<Event> GetEvents()
+        // GET: api/Events/{date?}
+        public IQueryable<Event> GetEvents([FromUri]string date = null)
         {
-            return db.Events;
+            if (date == null)
+            {
+                return db.Events;
+            }
+            try
+            {
+                DateTime time = DateTime.Parse(date);
+                var day = time.Date;
+                var nextDay = day.AddDays(1);
+                return db.Events.Where(e => e.StartTime >= day && e.StartTime < nextDay);
+            }
+            catch (Exception e)
+            {
+                // TODO: handle appropriately or just omit the try-catch block
+                throw e;
+            }
         }
 
         // GET: api/Events/5
