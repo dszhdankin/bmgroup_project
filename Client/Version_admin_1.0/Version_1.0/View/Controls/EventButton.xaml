@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Version_1._0.View.Controls.EventButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Version_1._0.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="250" Margin="20 20 0 0" MinHeight="200" MinWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
+    </UserControl.Resources>
+    <Button Background="{Binding BackgroundImage}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <Grid ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding Date}" Foreground="White"></TextBlock>
+            <TextBlock Grid.Row="1" Text ="{Binding Name}" Foreground="White"></TextBlock>
+            <TextBlock Grid.Row="2" Text ="{Binding Description}" Foreground="White"></TextBlock>
+        </Grid>
+    </Button>
+
+</UserControl>
