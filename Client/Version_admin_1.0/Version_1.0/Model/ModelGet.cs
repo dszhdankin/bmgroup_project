@@ -37,7 +37,27 @@ namespace Version_1._0.Model
         }
 
 
-        public ObservableCollection<T> getByDate(string url, DateTime time)
+        public static ObservableCollection<T> getByDateId(string url, DateTime time, int id)
+        {
+            string way = "api/" + new T().getWay();
+            string str = "";
+            using (WebClient web = new WebClient())
+            {
+                try
+                {
+                    str = web.DownloadString(url + way + "?classId=" + id + "&date=" + time.ToString("o"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+            }
+
+            return jsonEventParse(str);
+        }
+
+        public static ObservableCollection<T> getByDate(string url, DateTime time)
         {
             string way = "api/" + new T().getWay();
             string str = "";
@@ -77,7 +97,7 @@ namespace Version_1._0.Model
         }
 
 
-        public ObservableCollection<T> jsonEventParse(string str)
+        public static ObservableCollection<T> jsonEventParse(string str)
         {
             try
             {
