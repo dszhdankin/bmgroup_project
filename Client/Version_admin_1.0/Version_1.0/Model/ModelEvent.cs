@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json.Linq;
 using System.Web.Script.Serialization;
 using System.Windows;
 
@@ -24,7 +24,7 @@ namespace Version_1._0.Model
 
         public byte[] getBytePhoto()
         {
-            if (Photo != "QEA=")
+            if (Photo != null && Photo != "" && Photo != "QEA=")
                 return Encoding.Default.GetBytes(Photo);
             else
                 return null;
