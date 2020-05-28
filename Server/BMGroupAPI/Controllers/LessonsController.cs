@@ -17,20 +17,23 @@ namespace BMGroupAPI.Controllers
     {
         private BMGroupAPIContext db = new BMGroupAPIContext();
 
-        // GET: api/Lessons
-        public IQueryable<Lesson> GetLessons()
-        {
-            return db.Lessons;
-        }
+        // GET: api/Lessons{date?}{classId?}
+        public IQueryable<Lesson> GetLessons([FromUri]string date = null, [FromUri]int? classId = null)
+        {   
+            if (date == null && classId == null)
+                return db.Lessons;
 
-        // GET: api/Lessons/5
-        [ResponseType(typeof(Lesson[]))]
-        public async Task<IHttpActionResult> GetLessonsDay(int classId)
-        {
-            return Ok(from t in db.Lessons
-                    where t.ClassId == classId
-                    orderby t.Time
-                   select t);
+            if (date == null)
+                return db.Lessons.Where(lesson => lesson.ClassId == classId);
+
+            DateTime time = DateTime.Parse(date);
+            var day = time.Date;
+            var nextDay = day.AddDays(1);
+
+            if (classId == null)
+                return db.Lessons.Where(lesson => day <= lesson.Time && lesson.Time <= nextDay);
+
+            return db.Lessons.Where(lesson => lesson.ClassId == classId && day <= lesson.Time && lesson.Time <= nextDay);
         }
 
         // GET: api/Lessons/5
