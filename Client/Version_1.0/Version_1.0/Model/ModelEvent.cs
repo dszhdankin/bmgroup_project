@@ -1,57 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Web.Script.Serialization;
 
 namespace Version_1._0.Model
 {
-    public class EventInfo
+    public class Event : ModelItem
     {
-        string name;
-        string discription;
-        DateTime date;
+        public int EventId { get; set; }
+        public string Description { get; set; }
+        public string Title { get; set; }
+        public DateTime StartTime { get; set; }
+        public string Photo { get; set; }
 
-        public EventInfo(string nam, string dis, DateTime dat)
+        public byte[] getBytePhoto()
         {
-            name = nam;
-            discription = dis;
-            date = dat;
+            if (Photo != "QEA=")
+                return Encoding.Default.GetBytes(Photo);
+            else
+                return null;
         }
 
-        public string Name
+        public override string getWay()
         {
-            get => name;
-        }
-
-        public string Discription
-        {
-            get => discription;
-        }
-
-        public string Date
-        {
-            get => date.ToString(System.Globalization.CultureInfo.InstalledUICulture);
+            return "Events/";
         }
     }
 
-    class ModelEvent
-    {
-        public EventInfo get(string url)
-        {
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            StreamReader strm = new StreamReader(req.GetResponse().GetResponseStream());
-
-            return jsoneParse(strm.ReadToEnd());
-        }
-
-        private EventInfo jsoneParse(string val)
-        {
-            JObject joj = JObject.Parse(val);
-            return new EventInfo((string)joj["discription"], (string)joj["name"], (DateTime)joj["time"]);
-        }
-    }
+   
 }

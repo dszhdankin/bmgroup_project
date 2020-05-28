@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Version_1._0</RootNamespace>
     <AssemblyName>Version_1.0</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,15 +60,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ModelClass.cs" />
+    <Compile Include="Model\ModelEllectives.cs" />
+    <Compile Include="Model\ModelGet.cs" />
+    <Compile Include="Model\ModelOrganization.cs" />
+    <Compile Include="Model\ModelStaff.cs" />
+    <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="Model\ModelEvent.cs" />
     <Compile Include="Model\ModelLesson.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="ViewModel\EmployeesPageVM.cs" />
     <Compile Include="ViewModel\EventButtonVM.cs" />
     <Compile Include="ViewModel\EventsPageVM.cs" />
+    <Compile Include="ViewModel\LessonVM.cs" />
     <Compile Include="ViewModel\MainPageVM.cs" />
+    <Compile Include="ViewModel\SchedulePageVM.cs" />
+    <Compile Include="ViewModel\SchoolScheduleVM.cs" />
+    <Compile Include="ViewModel\SingleLessonVM.cs" />
+    <Compile Include="View\Controls\DaySchedule.xaml.cs">
+      <DependentUpon>DaySchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\EmployeeButton.xaml.cs">
+      <DependentUpon>EmployeeButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\EventButton.xaml.cs">
       <DependentUpon>EventButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\GroupButton.xaml.cs">
+      <DependentUpon>GroupButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\EmployeesPage.xaml.cs">
+      <DependentUpon>EmployeesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
@@ -74,11 +99,26 @@
     <Compile Include="View\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\SchedulePage.xaml.cs">
+      <DependentUpon>SchedulePage.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\ImageResourcesDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Controls\DaySchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\EmployeeButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Controls\EventButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\GroupButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,11 +134,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Pages\EmployeesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\EventsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\SchedulePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,5 +208,6 @@
   <ItemGroup>
     <Resource Include="imageresources\teacher.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
