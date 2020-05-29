@@ -17,10 +17,17 @@ namespace BMGroupAPI.Controllers
     {
         private BMGroupAPIContext db = new BMGroupAPIContext();
 
-        // GET: api/Ellectives
-        public IQueryable<Ellective> GetEllectives()
+        // GET: api/Ellectives{date?}
+        public IQueryable<Ellective> GetEllectives([FromUri]string date = null)
         {
-            return db.Ellectives;
+            if (date == null)
+                return db.Ellectives;
+
+            DateTime time = DateTime.Parse(date);
+            var day = time.Date;
+            var nextDay = day.AddDays(1);
+            
+            return db.Ellectives.Where(ellective => day <= ellective.Time && ellective.Time <= nextDay);
         }
 
         // GET: api/Ellectives/5

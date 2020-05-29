@@ -178,6 +178,10 @@
     <Compile Include="Migrations\202003161535448_init.designer.cs">
       <DependentUpon>202003161535448_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005291128530_Ellectives for Organization.cs" />
+    <Compile Include="Migrations\202005291128530_Ellectives for Organization.designer.cs">
+      <DependentUpon>202005291128530_Ellectives for Organization.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BMGroupAPIContext.cs" />
     <Compile Include="Models\Class.cs" />
@@ -274,6 +278,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003161535448_init.resx">
       <DependentUpon>202003161535448_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005291128530_Ellectives for Organization.resx">
+      <DependentUpon>202005291128530_Ellectives for Organization.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
