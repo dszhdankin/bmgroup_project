@@ -16,6 +16,7 @@ namespace Version_1._0
     public partial class App : Application
     {
         public const string SERVER_NAME = "https://localhost:44374/";
+        public const int NO_ID = -1;
 
         public static NavigationService MainNavigationService =>
             (App.Current.MainWindow as MainWindow).Frame.NavigationService;

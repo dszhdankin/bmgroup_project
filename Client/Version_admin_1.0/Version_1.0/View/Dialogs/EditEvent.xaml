@@ -62,6 +62,7 @@
         <Button Grid.Row="5" Grid.Column="0" Command="{Binding Path=RequestCommand}" 
                 HorizontalAlignment="Left" MinWidth="100">OK</Button>
 
-        
+
     </Grid>
 </Window>
+

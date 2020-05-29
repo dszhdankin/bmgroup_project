@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Windows;
 
 namespace Version_1._0.Model
 {
@@ -45,7 +47,7 @@ namespace Version_1._0.Model
             {
                 try
                 {
-                    str = web.DownloadString(url + way + "?classId=" + id + "&date=" + time.ToString("o"));
+                    str = web.DownloadString(url + way + "?classId=" + id + "&date=" + time.ToUniversalTime().ToString("o"));
                 }
                 catch (Exception ex)
                 {
@@ -83,16 +85,10 @@ namespace Version_1._0.Model
             string str = "";
             using (WebClient web = new WebClient())
             {
-                try
-                {
-                    web.Encoding = System.Text.Encoding.UTF8;
-                    web.Headers[HttpRequestHeader.ContentType] = "application/json";
-                    web.UploadString(url + way, "POST", eventToJson(data));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                web.Encoding = System.Text.Encoding.UTF8;
+                web.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string json = eventToJson(data);
+                web.UploadString(url + way, "POST", json);
             }
         }
 
@@ -102,6 +98,7 @@ namespace Version_1._0.Model
             try
             {
                 JavaScriptSerializer js = new JavaScriptSerializer();
+                js.MaxJsonLength = Int32.MaxValue;
                 T[] result = js.Deserialize<T[]>(str);
 
                 var list = new ObservableCollection<T>();
@@ -112,6 +109,8 @@ namespace Version_1._0.Model
             }
             catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.GetType().ToString());
                 return null;
             }
         }
@@ -121,11 +120,14 @@ namespace Version_1._0.Model
             try
             {
                 JavaScriptSerializer js = new JavaScriptSerializer();
+                js.MaxJsonLength = Int32.MaxValue;
                 //js.RegisterConverters(new[] { new DateTimeJavaScriptConverter() });
                 return js.Serialize(data);
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.GetType().ToString());
                 return null;
             }
         }

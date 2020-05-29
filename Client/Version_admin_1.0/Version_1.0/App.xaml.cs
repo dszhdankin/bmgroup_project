@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using Version_1._0.View;
 
 namespace Version_1._0
 {
@@ -16,6 +17,8 @@ namespace Version_1._0
     public partial class App : Application
     {
         public const string SERVER_NAME = "https://localhost:44374/";
+
+        public const int NO_ID = -1;
 
         public static NavigationService MainNavigationService =>
             (App.Current.MainWindow as MainWindow).Frame.NavigationService;

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Version_1._0.ViewModel;
+using Version_1._0.ViewModel.PageVm;
 
 namespace Version_1._0.View.Pages
 {
@@ -24,7 +24,7 @@ namespace Version_1._0.View.Pages
         public SchedulePage()
         {
             InitializeComponent();
-            this.DataContext = new SchedulePageVM(this);
+            this.DataContext = new SchedulePageVm(this);
         }
     }
 }

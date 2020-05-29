@@ -45,7 +45,7 @@ namespace Version_1._0.Model
             {
                 try
                 {
-                    str = web.DownloadString(url + way + "?classId=" + id + "&date=" + time.ToString("o"));
+                    str = web.DownloadString(url + way + "?classId=" + id + "&date=" + time.ToUniversalTime().ToString("o"));
                 }
                 catch (Exception ex)
                 {
@@ -102,8 +102,9 @@ namespace Version_1._0.Model
             try
             {
                 JavaScriptSerializer js = new JavaScriptSerializer();
+                js.MaxJsonLength = Int32.MaxValue;
                 T[] result = js.Deserialize<T[]>(str);
-
+                
                 var list = new ObservableCollection<T>();
 
                 foreach (var item in result)
@@ -121,6 +122,7 @@ namespace Version_1._0.Model
             try
             {
                 JavaScriptSerializer js = new JavaScriptSerializer();
+                js.MaxJsonLength = Int32.MaxValue;
                 //js.RegisterConverters(new[] { new DateTimeJavaScriptConverter() });
                 return js.Serialize(data);
             }

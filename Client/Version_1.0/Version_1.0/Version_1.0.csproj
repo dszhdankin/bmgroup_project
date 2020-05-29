@@ -65,19 +65,19 @@
     <Compile Include="Model\ModelGet.cs" />
     <Compile Include="Model\ModelOrganization.cs" />
     <Compile Include="Model\ModelStaff.cs" />
-    <Compile Include="ViewModel\EmployeeVM.cs" />
+    <Compile Include="ViewModel\ControlVm\EmployeeVm.cs" />
     <Compile Include="Model\ModelEvent.cs" />
     <Compile Include="Model\ModelLesson.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
-    <Compile Include="ViewModel\EmployeesPageVM.cs" />
-    <Compile Include="ViewModel\EventButtonVM.cs" />
-    <Compile Include="ViewModel\EventsPageVM.cs" />
-    <Compile Include="ViewModel\LessonVM.cs" />
-    <Compile Include="ViewModel\MainPageVM.cs" />
-    <Compile Include="ViewModel\SchedulePageVM.cs" />
-    <Compile Include="ViewModel\SchoolScheduleVM.cs" />
-    <Compile Include="ViewModel\SingleLessonVM.cs" />
+    <Compile Include="ViewModel\ControlVm\GroupButtonVm.cs" />
+    <Compile Include="ViewModel\PageVm\EmployeesPageVm.cs" />
+    <Compile Include="ViewModel\ControlVm\EventButtonVm.cs" />
+    <Compile Include="ViewModel\PageVm\EventsPageVm.cs" />
+    <Compile Include="ViewModel\ControlVm\DayScheduleVm.cs" />
+    <Compile Include="ViewModel\PageVm\MainPageVm.cs" />
+    <Compile Include="ViewModel\PageVm\SchedulePageVm.cs" />
+    <Compile Include="ViewModel\ControlVm\LessonVm.cs" />
     <Compile Include="View\Controls\DaySchedule.xaml.cs">
       <DependentUpon>DaySchedule.xaml</DependentUpon>
     </Compile>
@@ -207,6 +207,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="imageresources\teacher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageresources\next.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

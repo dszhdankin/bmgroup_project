@@ -11,8 +11,17 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="5*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock TextAlignment ="Center" Text="{Binding DayOfWeek}" Grid.Row="0"></TextBlock>
-            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+            <TextBlock TextAlignment ="Center" Text="{Binding DayOfWeek}" Grid.Row="0" Grid.Column="0"></TextBlock>
+            <TextBlock TextAlignment="Center" Text="{Binding Path=Date, StringFormat=dd-MM-yyyy}"
+                       Grid.Row="0" Grid.Column="1"></TextBlock>
+            
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
                 <ListView ItemsSource ="{Binding LessonList}" >
                     <ListView.View>
                         <GridView>

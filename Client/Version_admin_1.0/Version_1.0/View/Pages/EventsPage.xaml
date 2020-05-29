@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Version_1._0.View.Pages"
-      xmlns:vm="clr-namespace:Version_1._0.ViewModel"
+      xmlns:vm="clr-namespace:Version_1._0.ViewModel.PageVm"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="NewEventsPage">
@@ -14,7 +14,7 @@
     </Page.Resources>
 
     <Page.DataContext>
-        <vm:EventsPageVM></vm:EventsPageVM>
+        <vm:EventsPageVm></vm:EventsPageVm>
     </Page.DataContext>
 
     <Grid Background="{StaticResource MainBackgroundImage}" ShowGridLines="False">
@@ -50,9 +50,6 @@
             </ItemsControl>
         </ScrollViewer>
         <Button Grid.Row="3" Grid.Column="0" Command="{Binding UpdateCommand}"> Update </Button>
-        <Button Grid.Row="3" Grid.Column="1" MinWidth="100" HorizontalAlignment="Left"
-                Command="{Binding AddEventCommand}">
-             Add event
-        </Button>
+        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" MinWidth="100" Command="{Binding AddEventCommand}">Add event</Button>
     </Grid>
 </Page>
