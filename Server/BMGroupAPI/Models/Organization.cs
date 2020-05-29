@@ -12,5 +12,6 @@ namespace BMGroupAPI.Models
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Class> Classes { get; set; }
         public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Ellective> Ellectives { get; set; }
     }
 }
