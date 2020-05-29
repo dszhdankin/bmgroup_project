@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Windows;
 
 namespace Version_1._0.Model
 {
@@ -65,11 +66,13 @@ namespace Version_1._0.Model
             {
                 try
                 {
-                    str = web.DownloadString(url + way + "?date=" + time.ToString("o"));
+                    string endpoint = url + way + "?date=" + time.ToUniversalTime().ToString("o");
+                    str = web.DownloadString(url + way + "?date=" + time.ToUniversalTime().ToString("o"));
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.GetType().ToString());
+                    MessageBox.Show(ex.Message);
                     return null;
                 }
             }

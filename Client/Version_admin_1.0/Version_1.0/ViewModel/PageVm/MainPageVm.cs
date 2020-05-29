@@ -17,12 +17,14 @@ namespace Version_1._0.ViewModel.PageVm
         public ICommand ToEventsCommand { get; private set; }
         public ICommand ToEmployeesCommand { get; private set; }
         public ICommand ToScheduleCommand { get; private set; }
+        public ICommand ToElectivesCommand { get; private set; }
 
         public MainPageVm()
         {
             ToEventsCommand = new RelayCommand(ToEvents);
             ToEmployeesCommand = new RelayCommand(ToEmployees);
             ToScheduleCommand = new RelayCommand(ToSchedule);
+            ToElectivesCommand = new RelayCommand(obj =>  App.MainNavigationService.Navigate(new ElectivesPage()));
         }
 
         public string EmployeesTitle

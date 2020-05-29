@@ -67,7 +67,7 @@ namespace Version_1._0.Model
             {
                 try
                 {
-                    str = web.DownloadString(url + way + "?date=" + time.ToString("o"));
+                    str = web.DownloadString(url + way + "?date=" + time.ToUniversalTime().ToString("o"));
                 }
                 catch (Exception ex)
                 {

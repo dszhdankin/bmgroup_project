@@ -69,16 +69,21 @@
     <Compile Include="Model\ModelLesson.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="ViewModel\ControlVm\DayElectivesVm.cs" />
     <Compile Include="ViewModel\ControlVm\DayScheduleVm.cs" />
     <Compile Include="ViewModel\ControlVm\EmployeeVm.cs" />
     <Compile Include="ViewModel\ControlVm\EventButtonVm.cs" />
     <Compile Include="ViewModel\ControlVm\GroupButtonVm.cs" />
     <Compile Include="ViewModel\ControlVm\LessonVm.cs" />
+    <Compile Include="ViewModel\PageVm\ElectivesPageVm.cs" />
     <Compile Include="ViewModel\PageVm\EmployeesPageVm.cs" />
     <Compile Include="ViewModel\PageVm\EventsPageVm.cs" />
     <Compile Include="ViewModel\PageVm\MainPageVm.cs" />
     <Compile Include="ViewModel\PageVm\SchedulePageVm.cs" />
     <Compile Include="ViewModel\WindowVm\AddEditEventVm.cs" />
+    <Compile Include="View\Controls\DayElectives.xaml.cs">
+      <DependentUpon>DayElectives.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\DaySchedule.xaml.cs">
       <DependentUpon>DaySchedule.xaml</DependentUpon>
     </Compile>
@@ -96,6 +101,9 @@
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\ElectivesPage.xaml.cs">
+      <DependentUpon>ElectivesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
@@ -117,6 +125,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Controls\DayElectives.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Controls\DaySchedule.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\ElectivesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -20,7 +20,7 @@ namespace Version_1._0.Model
         public byte[] getBytePhoto()
         {
             if (Photo != "QEA=")
-                return Encoding.Default.GetBytes(Photo);
+                return Convert.FromBase64String(Photo);
             else
                 return null;
         }
