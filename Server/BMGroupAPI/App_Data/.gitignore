@@ -1,0 +1,5 @@
+# Ignore everything, but this file.
+# This is necessary to keep this directory empty in the git index
+# (otherwise it would be missing and cause problems with Update-Database command)
+*
+!.gitignore
