@@ -62,8 +62,8 @@ namespace Version_1._0.ViewModel.PageVm
         private void AddEventDialog(object parameter)
         {
             EditEvent addEventView = new EditEvent();
-            AddEditEventVM addEventVm = new AddEditEventVM();
-            addEventView.DataContext = addEventVm;
+            EditEventVM addEventVm = new EditEventVM();
+            addEventView.DataContext = addEventVm;  
             addEventView.ShowDialog();
         }
 

@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Web.UI;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 using Version_1._0.Model;
@@ -14,7 +16,7 @@ using Version_1._0.Utilities;
 
 namespace Version_1._0.ViewModel.WindowVm
 {
-    class AddEditEventVM : INotifyPropertyChanged
+    class EditEventVM : INotifyPropertyChanged
     {
         private Event eventInfo;
 
@@ -42,18 +44,41 @@ namespace Version_1._0.ViewModel.WindowVm
 
         private void PostEvent(object parameter)
         {
-            try
+            Action<Event> dataPoster = new Action<Event>(curEvent =>
             {
-                eventInfo.StartTime = eventInfo.StartTime.ToUniversalTime();
-                ModelGet<Event>.post(App.SERVER_NAME, eventInfo);
-                MessageBox.Show("Success");
-            }
-            catch (Exception e)
+                try
+                {
+                    ModelGet<Event>.post(App.SERVER_NAME, curEvent);
+                    App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal,
+                        new Action<object>(sender => MessageBox.Show("Event was successfully created!")), this);
+                }
+                catch (Exception e)
+                {
+                    App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal, 
+                        new Action<string>(message => MessageBox.Show(message)), e.Message);
+                }
+            });
+            dataPoster.BeginInvoke(eventInfo, null, null);
+        }
+
+        private void PutEvent(object parameter)
+        {
+            Action<Event> dataPuter = new Action<Event>(curEvent =>
             {
-                MessageBox.Show(e.Message);
-                MessageBox.Show(e.GetType().ToString());
-            }
-            
+                try
+                {
+                    // TODO
+                    // Make a PUT request for curEvent
+                    App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal,
+                        new Action<string>(message => MessageBox.Show(message)), "Event was successfully edited!");
+                }
+                catch (Exception e)
+                {
+                    App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal,
+                        new Action<string>(message => MessageBox.Show(message)), e.Message);
+                }
+            });
+            dataPuter.BeginInvoke(eventInfo, null, null);
         }
 
         public BitmapImage Photo
@@ -110,15 +135,30 @@ namespace Version_1._0.ViewModel.WindowVm
         public ICommand RequestCommand { get; set; }
         public ICommand ChoosePhotoCommand { get; set; }
 
-        public AddEditEventVM()
+        public EditEventVM(string requestType = "POST", Event curEvent = null)
         {
             Title = "New event";
-            eventInfo = new Event();
-            eventInfo.Title = "My event.";
-            eventInfo.StartTime = new DateTime(2020, 5, 30);
-            eventInfo.Description = "This is some cool description.";
+            if (curEvent == null)
+            {
+                eventInfo = new Event();
+                eventInfo.Title = "My event.";
+                eventInfo.StartTime = new DateTime(2020, 5, 30);
+                eventInfo.Description = "This is some cool description.";
+            }
+            else
+            {
+                eventInfo = new Event();
+                eventInfo.Description = curEvent.Description;
+                eventInfo.Photo = curEvent.Photo;
+                eventInfo.Title = curEvent.Title;
+                eventInfo.EventId = curEvent.EventId;
+                eventInfo.StartTime = curEvent.StartTime;
+            }
             OpenFileDialog fileDialog = new OpenFileDialog();
-            RequestCommand = new RelayCommand(PostEvent);
+            if (requestType.Equals("POST"))
+                RequestCommand = new RelayCommand(PostEvent);
+            else if (requestType.Equals("PUT"))
+                RequestCommand = new RelayCommand(PutEvent);
             ChoosePhotoCommand = new RelayCommand(ChoosePhoto);
         }
 

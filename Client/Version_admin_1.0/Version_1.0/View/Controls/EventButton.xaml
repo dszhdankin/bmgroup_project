@@ -20,6 +20,12 @@
             <TextBlock Grid.Row="1" Text ="{Binding Name}" Foreground="White"></TextBlock>
             <TextBlock Grid.Row="2" Text ="{Binding Description}" Foreground="White"></TextBlock>
         </Grid>
+        <Button.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Редактировать" Command="{Binding EditEventCommand}"></MenuItem>
+                <MenuItem Header="Удалить" Command="{Binding DeleteEventCommand}"></MenuItem>
+            </ContextMenu>
+        </Button.ContextMenu>
     </Button>
 
 </UserControl>

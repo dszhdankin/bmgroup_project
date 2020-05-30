@@ -14,16 +14,20 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="0.5*"></RowDefinition>
-                <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <Image Source="{Binding Photo}" Grid.Row="0" Stretch="Fill">
                 
             </Image>
             <TextBlock x:Name="Surname" Text ="{Binding Name}" Grid.Row="1" Foreground="Black"/>
-            <TextBlock x:Name="Position" Grid.Row="2" Text ="{Binding Position}" Foreground="Black"/>
-            <TextBlock x:Name="Description" Grid.Row="3" Text ="{Binding Description}" Foreground="Black"/>
+            <TextBlock x:Name="Description" Grid.Row="2" Text ="{Binding Description}" Foreground="Black"/>
         </Grid>
+        <Button.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Редактировать" Command="{Binding EditEmployeeCommand}"></MenuItem>
+                <MenuItem Header="Удалить" Command="{Binding DeleteEmployeeCommand}"></MenuItem>
+            </ContextMenu>
+        </Button.ContextMenu>
     </Button>
 
 </UserControl>
