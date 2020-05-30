@@ -30,7 +30,8 @@ namespace Version_1._0.Model
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.GetType().ToString());
                     return null;
                 }
             }
@@ -43,7 +44,15 @@ namespace Version_1._0.Model
             string way = "api/" + new T().getWay();
             using (WebClient web = new WebClient())
             {
-                web.UploadString(url + way + id, "DELETE", "");  
+                try
+                {
+                    web.UploadString(url + way + id, "DELETE", "");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.GetType().ToString());
+                }
             }
         }
 
@@ -59,7 +68,8 @@ namespace Version_1._0.Model
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.GetType().ToString());
                     return null;
                 }
             }
@@ -79,7 +89,8 @@ namespace Version_1._0.Model
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.GetType().ToString());
                     return null;
                 }
             }
