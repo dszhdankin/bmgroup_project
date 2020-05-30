@@ -20,8 +20,16 @@ namespace Version_1._0.View.Controls
     /// </summary>
     public partial class GroupButton : UserControl
     {
+        public int ClassId { get; set; }
         public GroupButton()
         {
+            ClassId = App.NO_ID;
+            InitializeComponent();
+        }
+
+        public GroupButton(int classId)
+        {
+            ClassId = classId;
             InitializeComponent();
         }
     }

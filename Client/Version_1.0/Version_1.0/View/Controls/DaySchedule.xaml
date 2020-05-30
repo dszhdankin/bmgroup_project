@@ -11,14 +11,23 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="5*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock TextAlignment ="Center" Text="{Binding DayOfWeek}" Grid.Row="0"></TextBlock>
-            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+            <TextBlock TextAlignment ="Center" Text="{Binding DayOfWeek}" Grid.Row="0" Grid.Column="0"></TextBlock>
+            <TextBlock TextAlignment="Center" Text="{Binding Path=Date, StringFormat=dd-MM-yyyy}"
+                       Grid.Row="0" Grid.Column="1"></TextBlock>
+            
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
                 <ListView ItemsSource ="{Binding LessonList}" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}"  Width="70" Header="Начало"></GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="200" Header="Предмет"></GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cabinet}" Width="70" Header="Аудитория"></GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}"  Width="150" Header="Начало"></GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="450" Header="Предмет"></GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cabinet}" Width="150" Header="Аудитория"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

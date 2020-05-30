@@ -35,7 +35,8 @@
                        VerticalAlignment="Center" Text="Название шараги"></TextBlock>
             
         </StackPanel>
-        <TextBlock FontSize="30" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Text="Расписание" 
+
+        <TextBlock FontSize="30" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Text="{Binding CurClassName}" 
                    VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
         <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" 
@@ -49,8 +50,13 @@
             </ItemsControl>
         </ScrollViewer>
 
-        
-        
+        <Button Grid.Row="3" Grid.Column="0" Background="White" Command="{Binding PrevWeekCommand}">
+            <Image Source="{StaticResource PrevWeekArrow}"></Image>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="4" Background="White" Command="{Binding NextWeekCommand}">
+            <Image Source="{StaticResource NextWeekArrow}"></Image>
+        </Button>
+
         <uc:DaySchedule x:Name="Monday" Grid.Row="3" Grid.Column="1"></uc:DaySchedule>
         <uc:DaySchedule x:Name="Tuesday" Grid.Row="3" Grid.Column="2"></uc:DaySchedule>
         <uc:DaySchedule x:Name="Wednesday" Grid.Row="3" Grid.Column="3"></uc:DaySchedule>

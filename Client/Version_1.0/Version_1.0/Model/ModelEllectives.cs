@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Version_1._0.Model
 {
-    public class Ellective : ModelItem
+    public class Elective : ModelItem
     {
         public int EllectiveId { get; set; }
         public string Title { get; set; }

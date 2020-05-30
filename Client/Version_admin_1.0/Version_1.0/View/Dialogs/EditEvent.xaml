@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Version_1._0.View.Dialogs"
+        xmlns:vm="clr-namespace:Version_1._0.ViewModel.WindowVm"
         mc:Ignorable="d"
         Title="EditEvent" Height="450" Width="800">
 
@@ -62,6 +63,7 @@
         <Button Grid.Row="5" Grid.Column="0" Command="{Binding Path=RequestCommand}" 
                 HorizontalAlignment="Left" MinWidth="100">OK</Button>
 
-        
+
     </Grid>
 </Window>
+

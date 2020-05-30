@@ -16,10 +16,16 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding Date}" Foreground="White"></TextBlock>
-            <TextBlock Grid.Row="1" Text ="{Binding Name}" Foreground="White"></TextBlock>
-            <TextBlock Grid.Row="2" Text ="{Binding Description}" Foreground="White"></TextBlock>
+            <TextBlock Grid.Row="0" Text="{Binding Date}" Foreground="White" TextWrapping="Wrap"></TextBlock>
+            <TextBlock Grid.Row="1" Text ="{Binding Name}" Foreground="White" TextWrapping="Wrap"></TextBlock>
+            <TextBlock Grid.Row="2" Text ="{Binding Description}" Foreground="White" TextWrapping="Wrap"></TextBlock>
         </Grid>
+        <Button.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Редактировать" Command="{Binding EditEventCommand}"></MenuItem>
+                <MenuItem Header="Удалить" Command="{Binding DeleteEventCommand}"></MenuItem>
+            </ContextMenu>
+        </Button.ContextMenu>
     </Button>
 
 </UserControl>
