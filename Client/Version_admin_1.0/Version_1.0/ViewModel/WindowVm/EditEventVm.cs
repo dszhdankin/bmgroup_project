@@ -67,8 +67,7 @@ namespace Version_1._0.ViewModel.WindowVm
             {
                 try
                 {
-                    // TODO
-                    // Make a PUT request for curEvent
+                    ModelGet<Event>.put(App.SERVER_NAME, curEvent, curEvent.EventId);
                     App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal,
                         new Action<string>(message => MessageBox.Show(message)), "Event was successfully edited!");
                 }

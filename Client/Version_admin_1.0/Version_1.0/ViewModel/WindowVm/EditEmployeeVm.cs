@@ -38,8 +38,7 @@ namespace Version_1._0.ViewModel.WindowVm
             {
                 try
                 {
-                    // TODO
-                    // Make a POST request for curEmployee
+                    ModelGet<Employee>.post(App.SERVER_NAME, curEmployee);
                     App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal,
                         new Action<string>(message => MessageBox.Show(message)), "Employee was successfully added!");
                 }
@@ -58,8 +57,7 @@ namespace Version_1._0.ViewModel.WindowVm
             {
                 try
                 {
-                    // TODO
-                    // Make a PUT request for curEmployee
+                    ModelGet<Employee>.put(App.SERVER_NAME, curEmployee, curEmployee.EmployeeId);
                     App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal,
                         new Action<string>(message => MessageBox.Show(message)), "Employee was successfully edited!");
                 }

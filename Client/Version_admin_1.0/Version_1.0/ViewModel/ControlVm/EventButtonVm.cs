@@ -35,8 +35,7 @@ namespace Version_1._0.ViewModel.ControlVm
                 {
                     try
                     {
-                        // TODO
-                        // Put delete request for curEvent here.
+                        ModelGet<Event>.delete(App.SERVER_NAME, curEvent.EventId);
                         App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal,
                             new Action<string>(message => { MessageBox.Show(message); }), "Event was successfully deleted!");
                     }

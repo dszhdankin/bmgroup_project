@@ -32,8 +32,7 @@ namespace Version_1._0.ViewModel.ControlVm
             {
                 try
                 {
-                    // TODO
-                    // Put delete request for curEmployee here.
+                    ModelGet<Employee>.delete(App.SERVER_NAME, curEmployee.EmployeeId);
                     App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal,
                         new Action<string>(message => { MessageBox.Show(message); }), "Employee was successfully deleted!");
                 }

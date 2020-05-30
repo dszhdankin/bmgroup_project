@@ -19,8 +19,8 @@
             <Image Source="{Binding Photo}" Grid.Row="0" Stretch="Fill">
                 
             </Image>
-            <TextBlock x:Name="Surname" Text ="{Binding Name}" Grid.Row="1" Foreground="Black"/>
-            <TextBlock x:Name="Description" Grid.Row="2" Text ="{Binding Description}" Foreground="Black"/>
+            <TextBlock x:Name="Surname" Text ="{Binding Name}" Grid.Row="1" TextWrapping="Wrap" Foreground="Black"/>
+            <TextBlock x:Name="Description" Grid.Row="2" Text ="{Binding Description}"  TextWrapping="Wrap" Foreground="Black"/>
         </Grid>
         <Button.ContextMenu>
             <ContextMenu>
