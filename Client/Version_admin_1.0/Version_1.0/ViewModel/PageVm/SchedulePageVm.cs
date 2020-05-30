@@ -21,9 +21,13 @@ namespace Version_1._0.ViewModel.PageVm
         private delegate void AsyncCaller();
         private delegate void UpdateClassesCaller(ObservableCollection<Class> classes);
         private delegate void UpdateSchedulesCaller(List<ObservableCollection<Lesson>> collections);
+
+        private delegate void LessonsOnDateSetter(int id, string cln, DateTime dt, DayScheduleVm vm, List<Lesson> lessons);
         private delegate void AsyncLessonsFetcher(int id, string cln, DateTime dt1, DateTime dt2, DateTime dt3, 
             DateTime dt4, DateTime dt5, DateTime dt6);
 
+        private ModelGet<Class> classFetcher;
+        private ModelGet<Lesson> lessonFetcher;
         private ObservableCollection<GroupButton> groupButtons;
         private SchedulePage schedulePage;
         private DayScheduleVm mondayVm, tuesdayVm, wednesdayVm, thursdayVm, fridayVm, saturdayVm;
@@ -54,12 +58,13 @@ namespace Version_1._0.ViewModel.PageVm
         private void FetchClasses()
         {
             ObservableCollection<Class> classes = new ObservableCollection<Class>();
-            for (int i = 0; i < 10; i++)
+            ObservableCollection<Class> serverClasses = classFetcher.get(App.SERVER_NAME);
+            if (serverClasses != null)
             {
-                Class curClass = new Class();
-                curClass.ClassId = i;
-                curClass.Title = "Class" + i;
-                classes.Add(curClass);
+                foreach (var curClass in serverClasses)
+                {
+                    classes.Add(curClass);
+                }
             }
             App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal, new UpdateClassesCaller(UpdateUiClasses), classes);
         }
@@ -99,18 +104,17 @@ namespace Version_1._0.ViewModel.PageVm
             }
         }
 
-        private ObservableCollection<Lesson> getLessons(string className, DateTime date)
+        private ObservableCollection<Lesson> getLessons(int classId, DateTime date)
         {
             int curClassId = this.curClassId;
             ObservableCollection<Lesson> res = new ObservableCollection<Lesson>();
-            for (int i = 0; i < 8; i++)
+            ObservableCollection<Lesson> serverLessons = ModelGet<Lesson>.getByDateId(App.SERVER_NAME, date, classId);
+            if (serverLessons != null)
             {
-                Lesson curLesson = new Lesson();
-                curLesson.Info = className + ":" + date.Month + ":" + date.Day;
-                curLesson.Time = date;
-                curLesson.ClassId = curClassId;
-                curLesson.LessonId = i;
-                res.Add(curLesson);
+                foreach (var curLesson in serverLessons)
+                {
+                    res.Add(curLesson);
+                }
             }
             return res;
         }
@@ -131,12 +135,12 @@ namespace Version_1._0.ViewModel.PageVm
             if (className == null)
                 return;
             List<ObservableCollection<Lesson>> collections = new List<ObservableCollection<Lesson>>();
-            collections.Add(getLessons(className, monday));
-            collections.Add(getLessons(className, tuesday));
-            collections.Add(getLessons(className, wednesday));
-            collections.Add(getLessons(className, thursday));
-            collections.Add(getLessons(className, friday));
-            collections.Add(getLessons(className, saturday));
+            collections.Add(getLessons(classId, monday));
+            collections.Add(getLessons(classId, tuesday));
+            collections.Add(getLessons(classId, wednesday));
+            collections.Add(getLessons(classId, thursday));
+            collections.Add(getLessons(classId, friday));
+            collections.Add(getLessons(classId, saturday));
             App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal, new UpdateSchedulesCaller(UpdateSchedules), collections);
         }
 
@@ -144,6 +148,38 @@ namespace Version_1._0.ViewModel.PageVm
         {
             AsyncCaller fetcher = new AsyncCaller(FetchClasses);
             fetcher.BeginInvoke(null, null);
+        }
+
+        private void SetLessonsOnDate(DayScheduleVm dayScheduleVm)
+        {
+            LessonsOnDateSetter setter = new LessonsOnDateSetter((classId, className, date, vm, clientLessons) =>
+            {
+                try
+                {
+                    if (className == null)
+                        return;
+                    ObservableCollection<Lesson> lessonsOnServer =
+                        ModelGet<Lesson>.getByDateId(App.SERVER_NAME, date, classId);
+                    if (lessonsOnServer == null)
+                        lessonsOnServer = new ObservableCollection<Lesson>();
+                    foreach (var curLesson in lessonsOnServer)
+                        ModelGet<Lesson>.delete(App.SERVER_NAME, curLesson.LessonId);
+                    foreach (var curLesson in clientLessons)
+                    {
+                        curLesson.ClassId = classId;
+                        ModelGet<Lesson>.post(App.SERVER_NAME, curLesson);
+                    }
+                    App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal, new Action<string>(message =>
+                        MessageBox.Show(message)), "Successfully applied!");
+                }
+                catch (Exception e)
+                {
+                    App.UiDispatcher.BeginInvoke(DispatcherPriority.Normal, new Action<string>(message =>
+                        MessageBox.Show(message)), e.Message);
+                }
+            });
+            setter.BeginInvoke(curClassId, CurClassName, dayScheduleVm.Date, 
+                dayScheduleVm, dayScheduleVm.Lessons, null, null);
         }
 
         private void InitializeWeek()
@@ -191,13 +227,22 @@ namespace Version_1._0.ViewModel.PageVm
             this.schedulePage = schedulePage;
             classes = new ObservableCollection<Class>();
             groupButtons = new ObservableCollection<GroupButton>();
+            lessonFetcher = new ModelGet<Lesson>();
+            classFetcher = new ModelGet<Class>();
 
-            mondayVm = new DayScheduleVm(DayOfWeek.Monday);
-            tuesdayVm = new DayScheduleVm(DayOfWeek.Tuesday);
-            wednesdayVm = new DayScheduleVm(DayOfWeek.Wednesday);
-            thursdayVm = new DayScheduleVm(DayOfWeek.Thursday);
-            fridayVm = new DayScheduleVm(DayOfWeek.Friday);
-            saturdayVm = new DayScheduleVm(DayOfWeek.Saturday);
+            mondayVm = new DayScheduleVm(DayOfWeek.Monday, schedulePage.Monday);
+            tuesdayVm = new DayScheduleVm(DayOfWeek.Tuesday, schedulePage.Tuesday);
+            wednesdayVm = new DayScheduleVm(DayOfWeek.Wednesday, schedulePage.Wednesday);
+            thursdayVm = new DayScheduleVm(DayOfWeek.Thursday, schedulePage.Thursday);
+            fridayVm = new DayScheduleVm(DayOfWeek.Friday, schedulePage.Friday);
+            saturdayVm = new DayScheduleVm(DayOfWeek.Saturday, schedulePage.Saturday);
+
+            mondayVm.LessonsApplier += SetLessonsOnDate;
+            tuesdayVm.LessonsApplier += SetLessonsOnDate;
+            wednesdayVm.LessonsApplier += SetLessonsOnDate;
+            thursdayVm.LessonsApplier += SetLessonsOnDate;
+            fridayVm.LessonsApplier += SetLessonsOnDate;
+            saturdayVm.LessonsApplier += SetLessonsOnDate;
 
             this.schedulePage.Monday.DataContext = mondayVm;
             this.schedulePage.Tuesday.DataContext = tuesdayVm;

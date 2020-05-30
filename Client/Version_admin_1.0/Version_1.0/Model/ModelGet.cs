@@ -130,7 +130,17 @@ namespace Version_1._0.Model
                 var list = new ObservableCollection<T>();
 
                 foreach (var item in result)
+                {
+                    object cur = item;
+                    if (cur is Lesson)
+                        (cur as Lesson).Time = (cur as Lesson).Time.ToLocalTime();
+                    else if (cur is Elective)
+                        (cur as Elective).Time = (cur as Elective).Time.ToLocalTime();
+                    else if (cur is Event)
+                        (cur as Event).StartTime = (cur as Event).StartTime.ToLocalTime();
                     list.Add(item);
+                }
+                    
                 return list;
             }
             catch(Exception ex)

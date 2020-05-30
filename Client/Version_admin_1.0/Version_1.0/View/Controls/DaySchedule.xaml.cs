@@ -20,9 +20,27 @@ namespace Version_1._0.View.Controls
     /// </summary>
     public partial class DaySchedule : UserControl
     {
+        private List<int> selectedInicies;
+
+        private void HandleSelectionChanged(object sender, EventArgs e)
+        {
+            selectedInicies.Clear();
+            foreach (var curItem in lessonsView.SelectedItems)
+            {
+                selectedInicies.Add(lessonsView.Items.IndexOf(curItem));                
+            }
+        }
+
+        public List<int> SelectedIndicies
+        {
+            get => selectedInicies;
+        }
+
         public DaySchedule()
         {
             InitializeComponent();
+            selectedInicies = new List<int>();
         }
+
     }
 }
