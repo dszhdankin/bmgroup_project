@@ -65,7 +65,7 @@
                 };
                 lessons[day * 5 + 1] = new Lesson()
                 {
-                    ClassId = 1,
+                    ClassId = 2,
                     Info = "English",
                     Time = startDay.AddDays(day).AddHours(10).AddMinutes(30),
                 };
@@ -77,7 +77,7 @@
                 };
                 lessons[day * 5 + 3] = new Lesson()
                 {
-                    ClassId = 1,
+                    ClassId = 2,
                     Info = "Programming",
                     Time = startDay.AddDays(day).AddHours(13).AddMinutes(30),
                 };
@@ -99,16 +99,16 @@
             };
             */
             Class[] classes = {
-                    new Class() {
-                        Title = "11A"
-                    },
-                    new Class() {
-                        Title = "10A"
-                    },
-                    new Class() {
-                        Title = "11B"
-                    }
-                };
+                new Class() {
+                    Title = "11A"
+                },
+                new Class() {
+                    Title = "10A"
+                },
+                new Class() {
+                    Title = "11B"
+                }
+            };
 
             Employee[] employees = {
                     new Employee () {
@@ -132,6 +132,7 @@
             org1.Classes = classes;
             org1.Employees = employees;
             org1.Events = events;
+            context.SaveChanges();
             context.Lessons.AddOrUpdate(lessons);
             context.Ellectives.AddOrUpdate(ellectives);
             context.SaveChanges();

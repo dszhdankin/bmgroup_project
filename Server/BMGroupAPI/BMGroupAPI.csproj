@@ -174,13 +174,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003161535448_init.cs" />
-    <Compile Include="Migrations\202003161535448_init.designer.cs">
-      <DependentUpon>202003161535448_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005291128530_Ellectives for Organization.cs" />
-    <Compile Include="Migrations\202005291128530_Ellectives for Organization.designer.cs">
-      <DependentUpon>202005291128530_Ellectives for Organization.cs</DependentUpon>
+    <Compile Include="Migrations\202005302029096_initial.cs" />
+    <Compile Include="Migrations\202005302029096_initial.designer.cs">
+      <DependentUpon>202005302029096_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BMGroupAPIContext.cs" />
@@ -276,11 +272,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003161535448_init.resx">
-      <DependentUpon>202003161535448_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005291128530_Ellectives for Organization.resx">
-      <DependentUpon>202005291128530_Ellectives for Organization.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005302029096_initial.resx">
+      <DependentUpon>202005302029096_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

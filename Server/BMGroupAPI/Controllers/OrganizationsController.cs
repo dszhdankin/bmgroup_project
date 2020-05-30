@@ -45,7 +45,7 @@ namespace BMGroupAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != organization.Id)
+            if (id != organization.OrganizationId)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace BMGroupAPI.Controllers
             db.Organizations.Add(organization);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = organization.Id }, organization);
+            return CreatedAtRoute("DefaultApi", new { id = organization.OrganizationId }, organization);
         }
 
         // DELETE: api/Organizations/5
@@ -113,7 +113,7 @@ namespace BMGroupAPI.Controllers
 
         private bool OrganizationExists(int id)
         {
-            return db.Organizations.Count(e => e.Id == id) > 0;
+            return db.Organizations.Count(e => e.OrganizationId == id) > 0;
         }
     }
 }

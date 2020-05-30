@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -13,11 +13,11 @@
                     {
                         ClassId = c.Int(nullable: false, identity: true),
                         Title = c.String(),
-                        Organization_Id = c.Int(),
+                        Organization_OrganizationId = c.Int(),
                     })
                 .PrimaryKey(t => t.ClassId)
-                .ForeignKey("dbo.Organizations", t => t.Organization_Id)
-                .Index(t => t.Organization_Id);
+                .ForeignKey("dbo.Organizations", t => t.Organization_OrganizationId, cascadeDelete: true)
+                .Index(t => t.Organization_OrganizationId);
             
             CreateTable(
                 "dbo.Ellectives",
@@ -27,8 +27,11 @@
                         Title = c.String(),
                         Time = c.DateTime(nullable: false),
                         Info = c.String(),
+                        Organization_OrganizationId = c.Int(),
                     })
-                .PrimaryKey(t => t.EllectiveId);
+                .PrimaryKey(t => t.EllectiveId)
+                .ForeignKey("dbo.Organizations", t => t.Organization_OrganizationId, cascadeDelete: true)
+                .Index(t => t.Organization_OrganizationId);
             
             CreateTable(
                 "dbo.Employees",
@@ -38,11 +41,11 @@
                         Name = c.String(),
                         Photo = c.Binary(),
                         Info = c.String(),
-                        Organization_Id = c.Int(),
+                        Organization_OrganizationId = c.Int(),
                     })
                 .PrimaryKey(t => t.EmployeeId)
-                .ForeignKey("dbo.Organizations", t => t.Organization_Id)
-                .Index(t => t.Organization_Id);
+                .ForeignKey("dbo.Organizations", t => t.Organization_OrganizationId, cascadeDelete: true)
+                .Index(t => t.Organization_OrganizationId);
             
             CreateTable(
                 "dbo.Events",
@@ -53,11 +56,11 @@
                         Title = c.String(),
                         StartTime = c.DateTime(nullable: false),
                         Photo = c.Binary(),
-                        Organization_Id = c.Int(),
+                        Organization_OrganizationId = c.Int(),
                     })
                 .PrimaryKey(t => t.EventId)
-                .ForeignKey("dbo.Organizations", t => t.Organization_Id)
-                .Index(t => t.Organization_Id);
+                .ForeignKey("dbo.Organizations", t => t.Organization_OrganizationId, cascadeDelete: true)
+                .Index(t => t.Organization_OrganizationId);
             
             CreateTable(
                 "dbo.Lessons",
@@ -68,27 +71,33 @@
                         Info = c.String(),
                         Time = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.LessonId);
+                .PrimaryKey(t => t.LessonId)
+                .ForeignKey("dbo.Classes", t => t.ClassId, cascadeDelete: true)
+                .Index(t => t.ClassId);
             
             CreateTable(
                 "dbo.Organizations",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        OrganizationId = c.Int(nullable: false, identity: true),
                         Description = c.String(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.OrganizationId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Events", "Organization_Id", "dbo.Organizations");
-            DropForeignKey("dbo.Employees", "Organization_Id", "dbo.Organizations");
-            DropForeignKey("dbo.Classes", "Organization_Id", "dbo.Organizations");
-            DropIndex("dbo.Events", new[] { "Organization_Id" });
-            DropIndex("dbo.Employees", new[] { "Organization_Id" });
-            DropIndex("dbo.Classes", new[] { "Organization_Id" });
+            DropForeignKey("dbo.Events", "Organization_OrganizationId", "dbo.Organizations");
+            DropForeignKey("dbo.Employees", "Organization_OrganizationId", "dbo.Organizations");
+            DropForeignKey("dbo.Ellectives", "Organization_OrganizationId", "dbo.Organizations");
+            DropForeignKey("dbo.Classes", "Organization_OrganizationId", "dbo.Organizations");
+            DropForeignKey("dbo.Lessons", "ClassId", "dbo.Classes");
+            DropIndex("dbo.Lessons", new[] { "ClassId" });
+            DropIndex("dbo.Events", new[] { "Organization_OrganizationId" });
+            DropIndex("dbo.Employees", new[] { "Organization_OrganizationId" });
+            DropIndex("dbo.Ellectives", new[] { "Organization_OrganizationId" });
+            DropIndex("dbo.Classes", new[] { "Organization_OrganizationId" });
             DropTable("dbo.Organizations");
             DropTable("dbo.Lessons");
             DropTable("dbo.Events");
