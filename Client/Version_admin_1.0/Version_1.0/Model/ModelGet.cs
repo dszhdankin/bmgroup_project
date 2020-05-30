@@ -37,6 +37,23 @@ namespace Version_1._0.Model
             return jsonEventParse(str);
         }
 
+        public static T put(string url, T data, int id)
+        {
+            string way = "api/" + new T().getWay();
+            string str = "";
+            using (WebClient web = new WebClient())
+            {
+                web.Encoding = System.Text.Encoding.UTF8;
+                web.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string json = eventToJson(data);
+                url = url + way + id;
+                str = web.UploadString(url, "PUT", json);
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                js.MaxJsonLength = Int32.MaxValue;
+                return js.Deserialize<T>(str);
+            }
+        }
+
         public static void delete(string url, int id)
         {
             string way = "api/" + new T().getWay();
