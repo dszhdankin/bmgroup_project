@@ -38,6 +38,14 @@ namespace Version_1._0.Model
             return jsonEventParse(str);
         }
 
+        public static void delete(string url, int id)
+        {
+            string way = "api/" + new T().getWay();
+            using (WebClient web = new WebClient())
+            {
+                web.UploadString(url + way + id, "DELETE", "");  
+            }
+        }
 
         public static ObservableCollection<T> getByDateId(string url, DateTime time, int id)
         {
@@ -79,7 +87,7 @@ namespace Version_1._0.Model
             return jsonEventParse(str);
         }
 
-        public static void post(string url, T data)
+        public static T post(string url, T data)
         {
             string way = "api/" + new T().getWay();
             string str = "";
@@ -88,7 +96,11 @@ namespace Version_1._0.Model
                 web.Encoding = System.Text.Encoding.UTF8;
                 web.Headers[HttpRequestHeader.ContentType] = "application/json";
                 string json = eventToJson(data);
-                web.UploadString(url + way, "POST", json);
+                str = web.UploadString(url + way, "POST", json);
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                js.MaxJsonLength = Int32.MaxValue;
+                return js.Deserialize<T>(str);
             }
         }
 

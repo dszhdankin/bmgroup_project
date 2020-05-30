@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -37,6 +38,14 @@ namespace Version_1._0.Model
             return jsonEventParse(str);
         }
 
+        public static void delete(string url, int id)
+        {
+            string way = "api/" + new T().getWay();
+            using (WebClient web = new WebClient())
+            {
+                web.UploadString(url + way + id, "DELETE", "");  
+            }
+        }
 
         public static ObservableCollection<T> getByDateId(string url, DateTime time, int id)
         {
@@ -66,13 +75,11 @@ namespace Version_1._0.Model
             {
                 try
                 {
-                    string endpoint = url + way + "?date=" + time.ToUniversalTime().ToString("o");
                     str = web.DownloadString(url + way + "?date=" + time.ToUniversalTime().ToString("o"));
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.GetType().ToString());
-                    MessageBox.Show(ex.Message);
+                    Console.WriteLine(ex.Message);
                     return null;
                 }
             }
@@ -80,22 +87,20 @@ namespace Version_1._0.Model
             return jsonEventParse(str);
         }
 
-        public static void post(string url, T data)
+        public static T post(string url, T data)
         {
             string way = "api/" + new T().getWay();
             string str = "";
             using (WebClient web = new WebClient())
             {
-                try
-                {
-                    web.Encoding = System.Text.Encoding.UTF8;
-                    web.Headers[HttpRequestHeader.ContentType] = "application/json";
-                    web.UploadString(url + way, "POST", eventToJson(data));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                web.Encoding = System.Text.Encoding.UTF8;
+                web.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string json = eventToJson(data);
+                str = web.UploadString(url + way, "POST", json);
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                js.MaxJsonLength = Int32.MaxValue;
+                return js.Deserialize<T>(str);
             }
         }
 
@@ -107,7 +112,7 @@ namespace Version_1._0.Model
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 js.MaxJsonLength = Int32.MaxValue;
                 T[] result = js.Deserialize<T[]>(str);
-                
+
                 var list = new ObservableCollection<T>();
 
                 foreach (var item in result)
@@ -116,6 +121,8 @@ namespace Version_1._0.Model
             }
             catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.GetType().ToString());
                 return null;
             }
         }
@@ -131,6 +138,8 @@ namespace Version_1._0.Model
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.GetType().ToString());
                 return null;
             }
         }
