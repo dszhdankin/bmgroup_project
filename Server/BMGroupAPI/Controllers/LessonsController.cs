@@ -36,6 +36,7 @@ namespace BMGroupAPI.Controllers
             return db.Lessons.Where(lesson => lesson.ClassId == classId && day <= lesson.Time && lesson.Time <= nextDay);
         }
 
+        [Authorize]
         // GET: api/Lessons/5
         [ResponseType(typeof(Lesson))]
         public async Task<IHttpActionResult> GetLesson(int id)

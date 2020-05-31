@@ -1,20 +1,25 @@
-﻿namespace BMGroupAPI.Migrations
+namespace BMGroupAPI.Migrations
 {
+    using BMGroupAPI.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<BMGroupAPI.Models.BMGroupAPIContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "BMGroupAPI.Models.BMGroupAPIContext";
         }
 
         protected override void Seed(BMGroupAPI.Models.BMGroupAPIContext context)
         {
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+            //  to avoid creating duplicate seed data.
 
             DateTime startDay = DateTime.Today;
 
@@ -88,16 +93,7 @@
                     Time = startDay.AddDays(day).AddHours(15),
                 };
             }
-            /*
-            int day = 0;
-            Lesson[] lessons = new Lesson[1];
-            lessons[0] = new Lesson()
-            {
-                ClassId = 1,
-                Info = "Math",
-                Time = new DateTime(2020, 3 + day, 23, 9, 0, 0)
-            };
-            */
+
             Class[] classes = {
                 new Class() {
                     Title = "11A"
@@ -121,13 +117,11 @@
                     }
             };
 
-            Organization org1 = new Organization() {
+            Organization org1 = new Organization()
+            {
                 Description = "School1"
             };
 
-            //if (context.Organizations.Count() != 0)
-             //   return;
-            
             context.Organizations.AddOrUpdate(org1);
             org1.Classes = classes;
             org1.Employees = employees;
@@ -136,13 +130,6 @@
             context.Lessons.AddOrUpdate(lessons);
             context.Ellectives.AddOrUpdate(ellectives);
             context.SaveChanges();
-            // context.Employees.AddOrUpdate(employees);
-            //context.Events.AddOrUpdate(events);
-            
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
         }
     }
 }
