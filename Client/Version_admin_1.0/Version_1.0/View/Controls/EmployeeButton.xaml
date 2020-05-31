@@ -19,7 +19,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button x:Name="Button" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                Grid.ColumnSpan="2">
+                Grid.ColumnSpan="2" Style="{StaticResource Font}">
             <Grid ShowGridLines="False">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"></RowDefinition>
@@ -29,12 +29,16 @@
                 <Image Source="{Binding Photo}" Grid.Row="0" Stretch="Fill">
 
                 </Image>
-                <TextBlock x:Name="Surname" Text ="{Binding Name}" Grid.Row="1" TextWrapping="Wrap" Foreground="Black"/>
-                <TextBlock x:Name="Description" Grid.Row="2" Text ="{Binding Description}"  TextWrapping="Wrap" Foreground="Black"/>
+                <TextBlock FontSize="12" x:Name="Surname" Text ="{Binding Name}"
+                           Grid.Row="1" TextWrapping="Wrap" Foreground="Black"/>
+                <TextBlock FontSize="12" Style="{StaticResource Font}" x:Name="Description" 
+                           Grid.Row="2" Text ="{Binding Description}"  TextWrapping="Wrap" Foreground="Black"/>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="0" Content="Edit" Command="{Binding EditEmployeeCommand}"></Button>
-        <Button Grid.Row="1" Grid.Column="1" Content="Delete" Command="{Binding DeleteEmployeeCommand}"></Button>
+        <Button Grid.Row="1" Grid.Column="0" Content="Edit" Command="{Binding EditEmployeeCommand}"
+                Style="{StaticResource ButtonStyle}"></Button>
+        <Button Grid.Row="1" Grid.Column="1" Content="Delete" Command="{Binding DeleteEmployeeCommand}"
+                Style="{StaticResource ButtonStyle}"></Button>
     </Grid>
     
 

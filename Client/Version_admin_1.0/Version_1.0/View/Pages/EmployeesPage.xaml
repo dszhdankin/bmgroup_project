@@ -49,8 +49,11 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-        <Button Grid.Column="0" Grid.Row="3" Command="{Binding UpdateCommand}">Update</Button>
-        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" MinWidth="100" Command="{Binding AddEmployeeCommand}"> Add employee </Button>
+        <Button Grid.Column="0" Grid.Row="3" Command="{Binding UpdateCommand}"
+                Style="{StaticResource ButtonStyle}">Update</Button>
+        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" 
+                MinWidth="100" Command="{Binding AddEmployeeCommand}"
+                Style="{StaticResource ButtonStyle}"> Add employee </Button>
     </Grid>
 
 </Page>

@@ -10,4 +10,17 @@
     <BitmapImage x:Key="EmployeeButtonImage" UriSource="pack://application:,,,/imageresources/employee_image.png"></BitmapImage>
     <BitmapImage x:Key="NextWeekArrow" UriSource="pack://application:,,,/imageresources/next.png"></BitmapImage>
     <BitmapImage x:Key="PrevWeekArrow" UriSource="pack://application:,,,/imageresources/back.png"></BitmapImage>
+    <Style x:Key="ButtonStyle">
+        <Setter Property="Control.Opacity" Value="0.8"></Setter>
+        <Setter Property="Control.FontSize" Value="20"></Setter>
+        <Setter Property="Control.Background" Value="Aquamarine"></Setter>
+    </Style>
+    <Style x:Key="LittleButtonStyle">
+        <Setter Property="Control.Opacity" Value="0.8"></Setter>
+        <Setter Property="Control.FontSize" Value="20"></Setter>
+        <Setter Property="Control.Background" Value="Aquamarine"></Setter>
+    </Style>
+    <Style x:Key="Font">
+        <Setter Property="Control.FontSize" Value="20"></Setter>
+    </Style>
 </ResourceDictionary>

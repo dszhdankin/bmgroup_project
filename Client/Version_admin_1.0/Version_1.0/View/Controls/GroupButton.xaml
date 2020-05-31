@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:Version_1._0.View.Controls"
              mc:Ignorable="d" 
              >
+    <UserControl.Resources>
+        <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
+    </UserControl.Resources>
     <Grid Margin="30 0 0 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -14,10 +17,12 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="Button" Content="{Binding Title}" Command="{Binding ChangeClassCommand}" MinWidth="100"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                Grid.Column="0">
+                Grid.Column="0" Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button Grid.Column="1" Content="Edit" MinWidth="50" Command="{Binding PutClassCommand}"></Button>
-        <Button Grid.Column="2" Content="Delete" MinWidth="50" Command="{Binding DeleteClassCommand}"></Button>
+        <Button Grid.Column="1" Content="Edit" MinWidth="50" 
+                Command="{Binding PutClassCommand}" Style="{StaticResource ButtonStyle}"></Button>
+        <Button Grid.Column="2" Content="Delete" MinWidth="50" 
+                Command="{Binding DeleteClassCommand}" Style="{StaticResource ButtonStyle}"></Button>
     </Grid>
         
 </UserControl>

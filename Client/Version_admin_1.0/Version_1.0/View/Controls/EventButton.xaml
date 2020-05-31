@@ -10,9 +10,6 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
     </UserControl.Resources>
-    
-    
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"></RowDefinition>
@@ -32,19 +29,15 @@
                     <RowDefinition Height="4*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="{Binding BackgroundImage}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding Date}" TextWrapping="Wrap"></TextBlock>
-                <TextBlock Grid.Row="2" Text ="{Binding Name}" TextWrapping="Wrap"></TextBlock>
-                <TextBlock Grid.Row="3" Text ="{Binding Description}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock FontSize="12" Grid.Row="1" Text="{Binding Date}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock FontSize="12" Grid.Row="2" Text ="{Binding Name}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock FontSize="12" Grid.Row="3" Text ="{Binding Description}" TextWrapping="Wrap"></TextBlock>
             </Grid>
-            <Button.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Edit" Command="{Binding EditEventCommand}"></MenuItem>
-                    <MenuItem Header="Delete" Command="{Binding DeleteEventCommand}"></MenuItem>
-                </ContextMenu>
-            </Button.ContextMenu>
         </Button>
-        <Button Grid.Row="1" Grid.Column="0" Content="Edit" Command="{Binding EditEventCommand}"></Button>
-        <Button Grid.Row="1" Grid.Column="1" Content="Delete" Command="{Binding DeleteEventCommand}"></Button>
+        <Button Grid.Row="1" Grid.Column="0" Content="Edit" 
+                Command="{Binding EditEventCommand}" Style="{StaticResource ButtonStyle}"></Button>
+        <Button Grid.Row="1" Grid.Column="1" Content="Delete" 
+                Command="{Binding DeleteEventCommand}" Style="{StaticResource ButtonStyle}"></Button>
     </Grid>
 
 </UserControl>
