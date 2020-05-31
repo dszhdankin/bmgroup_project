@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Version_1._0.ViewModel.PageVm;
 
-namespace Version_1._0.View.Pages
+namespace Version_1._0.View.Dialogs
 {
     /// <summary>
-    /// Логика взаимодействия для ElectivesPage.xaml
+    /// Логика взаимодействия для EditClass.xaml
     /// </summary>
-    public partial class ElectivesPage : Page
+    public partial class EditClass : Window
     {
-        public ElectivesPage()
+        public EditClass()
         {
             InitializeComponent();
-            this.DataContext = new ElectivesPageVm(this);
         }
     }
 }

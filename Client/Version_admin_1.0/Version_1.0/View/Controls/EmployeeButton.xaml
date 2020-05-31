@@ -24,8 +24,8 @@
         </Grid>
         <Button.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="Редактировать" Command="{Binding EditEmployeeCommand}"></MenuItem>
-                <MenuItem Header="Удалить" Command="{Binding DeleteEmployeeCommand}"></MenuItem>
+                <MenuItem Header="Edit" Command="{Binding EditEmployeeCommand}"></MenuItem>
+                <MenuItem Header="Delete" Command="{Binding DeleteEmployeeCommand}"></MenuItem>
             </ContextMenu>
         </Button.ContextMenu>
     </Button>

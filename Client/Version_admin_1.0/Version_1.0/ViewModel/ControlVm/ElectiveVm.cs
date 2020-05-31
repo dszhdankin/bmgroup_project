@@ -1,31 +1,54 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
+using System.Text;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Version_1._0.Model;
 
 namespace Version_1._0.ViewModel.ControlVm
 {
-    class LessonVm : INotifyPropertyChanged
+    class ElectiveVm : INotifyPropertyChanged
     {
-        private Lesson lesson;
+        private Elective elective;
 
-        public Lesson Lesson
+        public Elective Elective
         {
-            get => lesson;
+            get => elective;
         }
 
-        public LessonVm(Lesson lesson)
+        public ElectiveVm(Elective elective)
         {
-            this.lesson = lesson;
+            this.elective = elective;
         }
 
-        public string Date
+        public string Title
+        {
+            get => elective.Title;
+            set
+            {
+                elective.Title = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Info
+        {
+            get => elective.Info;
+            set
+            {
+                elective.Info = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Time
         {
             get
             {
-                DateTime time = lesson.Time;
+                DateTime time = elective.Time;
                 return (time.Hour / 10).ToString() + time.Hour % 10 + ":"
                        + time.Minute / 10 + time.Minute % 10;
             }
@@ -36,7 +59,7 @@ namespace Version_1._0.ViewModel.ControlVm
                 {
                     int hour = int.Parse(str.Substring(0, 2));
                     int minute = int.Parse(str.Substring(3, 2));
-                    lesson.Time = lesson.Time.Date.AddHours(hour).AddMinutes(minute);
+                    elective.Time = new DateTime(elective.Time.Year, elective.Time.Month, elective.Time.Day, hour, minute, 0);
                     OnPropertyChanged();
                 }
                 catch (Exception e)
@@ -46,22 +69,6 @@ namespace Version_1._0.ViewModel.ControlVm
             }
         }
 
-        public string Name
-        {
-            get => lesson.Info;
-            set
-            {
-                lesson.Info = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Cabinet
-        {
-            get => "None";
-            set => OnPropertyChanged();
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -69,6 +76,5 @@ namespace Version_1._0.ViewModel.ControlVm
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

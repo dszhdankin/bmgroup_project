@@ -13,10 +13,6 @@
         <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
     </Page.Resources>
 
-    <Page.DataContext>
-        <vm:ElectivesPageVm></vm:ElectivesPageVm>
-    </Page.DataContext>
-
     <Grid Background="{StaticResource MainBackgroundImage}" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -50,12 +46,12 @@
             <Image Source="{StaticResource NextWeekArrow}"></Image>
         </Button>
 
-        <uc:DayElectives Grid.Row="2" Grid.Column="1" DataContext="{Binding Monday}"></uc:DayElectives>
-        <uc:DayElectives Grid.Row="2" Grid.Column="2" DataContext="{Binding Tuesday}"></uc:DayElectives>
-        <uc:DayElectives Grid.Row="2" Grid.Column="3" DataContext="{Binding Wednesday}"></uc:DayElectives>
-        <uc:DayElectives Grid.Row="3" Grid.Column="1" DataContext="{Binding Thursday}"></uc:DayElectives>
-        <uc:DayElectives Grid.Row="3" Grid.Column="2" DataContext="{Binding Friday}"></uc:DayElectives>
-        <uc:DayElectives Grid.Row="3" Grid.Column="3" DataContext="{Binding Saturday}"></uc:DayElectives>
+        <uc:DayElectives x:Name="Monday" Grid.Row="2" Grid.Column="1" DataContext="{Binding Monday}"></uc:DayElectives>
+        <uc:DayElectives x:Name="Tuesday" Grid.Row="2" Grid.Column="2" DataContext="{Binding Tuesday}"></uc:DayElectives>
+        <uc:DayElectives x:Name="Wednesday" Grid.Row="2" Grid.Column="3" DataContext="{Binding Wednesday}"></uc:DayElectives>
+        <uc:DayElectives x:Name="Thursday" Grid.Row="3" Grid.Column="1" DataContext="{Binding Thursday}"></uc:DayElectives>
+        <uc:DayElectives x:Name="Friday" Grid.Row="3" Grid.Column="2" DataContext="{Binding Friday}"></uc:DayElectives>
+        <uc:DayElectives x:Name="Saturday" Grid.Row="3" Grid.Column="3" DataContext="{Binding Saturday}"></uc:DayElectives>
         <Button Grid.Row="4" Grid.Column="0" Command="{Binding UpdateCommand}">Update</Button>
     </Grid>
 </Page>

@@ -22,8 +22,8 @@
         </Grid>
         <Button.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="Редактировать" Command="{Binding EditEventCommand}"></MenuItem>
-                <MenuItem Header="Удалить" Command="{Binding DeleteEventCommand}"></MenuItem>
+                <MenuItem Header="Edit" Command="{Binding EditEventCommand}"></MenuItem>
+                <MenuItem Header="Delete" Command="{Binding DeleteEventCommand}"></MenuItem>
             </ContextMenu>
         </Button.ContextMenu>
     </Button>

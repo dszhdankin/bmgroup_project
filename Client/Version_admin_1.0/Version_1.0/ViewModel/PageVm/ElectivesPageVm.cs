@@ -12,6 +12,7 @@ using System.Windows.Threading;
 using JetBrains.Annotations;
 using Version_1._0.Model;
 using Version_1._0.Utilities;
+using Version_1._0.View.Pages;
 using Version_1._0.ViewModel.ControlVm;
 
 namespace Version_1._0.ViewModel.PageVm
@@ -23,6 +24,7 @@ namespace Version_1._0.ViewModel.PageVm
         private delegate void UiUpdater(List<ObservableCollection<Elective>> collections);
 
         private DayElectivesVm monday, tuesday, wednesday, thursday, friday, saturday;
+        private ElectivesPage electivesPage;
 
         private void InitializeWeek()
         {
@@ -70,7 +72,7 @@ namespace Version_1._0.ViewModel.PageVm
             dayElectivesVm.Electives.Clear();
             foreach (var curElective in collection)
             {
-                dayElectivesVm.Electives.Add(curElective);
+                dayElectivesVm.Electives.Add(new ElectiveVm(curElective));
             }
         }
 
@@ -170,14 +172,15 @@ namespace Version_1._0.ViewModel.PageVm
         public ICommand NextWeekCommand { get; private set; }
         public ICommand PrevWeekCommand { get; private set; }
 
-        public ElectivesPageVm()
+        public ElectivesPageVm(ElectivesPage electivesPage)
         {
-            Monday = new DayElectivesVm("Понедельник");
-            Tuesday = new DayElectivesVm("Вторник");
-            Wednesday = new DayElectivesVm("Среда");
-            Thursday = new DayElectivesVm("Четверг");
-            Friday = new DayElectivesVm("Пятница");
-            Saturday = new DayElectivesVm("Суббота");
+            this.electivesPage = electivesPage;
+            Monday = new DayElectivesVm("Понедельник", electivesPage.Monday);
+            Tuesday = new DayElectivesVm("Вторник", electivesPage.Tuesday);
+            Wednesday = new DayElectivesVm("Среда", electivesPage.Wednesday);
+            Thursday = new DayElectivesVm("Четверг", electivesPage.Thursday);
+            Friday = new DayElectivesVm("Пятница", electivesPage.Friday);
+            Saturday = new DayElectivesVm("Суббота", electivesPage.Saturday);
 
             InitializeWeek();
             UpdateCommand = new RelayCommand((obj) => { new AsyncCaller(FetchData).BeginInvoke(null, null); });

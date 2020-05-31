@@ -71,6 +71,7 @@
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="ViewModel\ControlVm\DayElectivesVm.cs" />
     <Compile Include="ViewModel\ControlVm\DayScheduleVm.cs" />
+    <Compile Include="ViewModel\ControlVm\ElectiveVm.cs" />
     <Compile Include="ViewModel\ControlVm\EmployeeVm.cs" />
     <Compile Include="ViewModel\ControlVm\EventButtonVm.cs" />
     <Compile Include="ViewModel\ControlVm\GroupButtonVm.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="ViewModel\PageVm\EventsPageVm.cs" />
     <Compile Include="ViewModel\PageVm\MainPageVm.cs" />
     <Compile Include="ViewModel\PageVm\SchedulePageVm.cs" />
+    <Compile Include="ViewModel\WindowVm\EditClassVm.cs" />
     <Compile Include="ViewModel\WindowVm\EditEmployeeVm.cs" />
     <Compile Include="ViewModel\WindowVm\EditEventVm.cs" />
     <Compile Include="View\Controls\DayElectives.xaml.cs">
@@ -96,6 +98,9 @@
     </Compile>
     <Compile Include="View\Controls\GroupButton.xaml.cs">
       <DependentUpon>GroupButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialogs\EditClass.xaml.cs">
+      <DependentUpon>EditClass.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialogs\EditEmployee.xaml.cs">
       <DependentUpon>EditEmployee.xaml</DependentUpon>
@@ -148,6 +153,10 @@
     <Page Include="View\Controls\GroupButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Dialogs\EditClass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialogs\EditEmployee.xaml">
       <SubType>Designer</SubType>

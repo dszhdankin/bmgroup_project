@@ -8,6 +8,11 @@
              >
     <Button Content="{Binding Title}" Command="{Binding ChangeClassCommand}" Margin="30 0 0 0" MinWidth="100"
             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType=UserControl}}">
-        
+        <Button.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Edit" Command="{Binding PutClassCommand}"></MenuItem>
+                <MenuItem Header="Delete" Command="{Binding DeleteClassCommand}"></MenuItem>
+            </ContextMenu>
+        </Button.ContextMenu>
     </Button>
 </UserControl>

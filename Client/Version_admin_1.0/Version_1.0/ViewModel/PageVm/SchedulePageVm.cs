@@ -11,8 +11,10 @@ using JetBrains.Annotations;
 using Version_1._0.Model;
 using Version_1._0.Utilities;
 using Version_1._0.View.Controls;
+using Version_1._0.View.Dialogs;
 using Version_1._0.View.Pages;
 using Version_1._0.ViewModel.ControlVm;
+using Version_1._0.ViewModel.WindowVm;
 
 namespace Version_1._0.ViewModel.PageVm
 {
@@ -207,6 +209,14 @@ namespace Version_1._0.ViewModel.PageVm
             saturdayVm.Date = saturdayVm.Date.AddDays(7.0);
         }
 
+        private void AddClass(object parameter)
+        {
+            EditClass editClass = new EditClass();
+            EditClassVm editClassVm = new EditClassVm("POST", null);
+            editClass.DataContext = editClassVm;
+            editClass.ShowDialog();
+        }
+
         private void WeekBack()
         {
             mondayVm.Date = mondayVm.Date.AddDays(-7.0);
@@ -217,10 +227,11 @@ namespace Version_1._0.ViewModel.PageVm
             saturdayVm.Date = saturdayVm.Date.AddDays(-7.0);
         }
 
-        public RelayCommand UpdateCommand { get; private set; }
-        public RelayCommand PrevWeekCommand { get; private set; }
-        public RelayCommand NextWeekCommand { get; private set; }
-        public RelayCommand ChangeClassCommand { get; private set; }
+        public ICommand UpdateCommand { get; private set; }
+        public ICommand PrevWeekCommand { get; private set; }
+        public ICommand NextWeekCommand { get; private set; }
+        public ICommand ChangeClassCommand { get; private set; }
+        public ICommand AddClassCommand { get; private set; }
 
         public SchedulePageVm(SchedulePage schedulePage)
         {
@@ -270,6 +281,7 @@ namespace Version_1._0.ViewModel.PageVm
                     wednesdayVm.Date, thursdayVm.Date, fridayVm.Date, saturdayVm.Date, null, null);
             });
             ChangeClassCommand = new RelayCommand(ChangeClass);
+            AddClassCommand = new RelayCommand(AddClass);
         }
 
         public ObservableCollection<GroupButton> GroupButtons

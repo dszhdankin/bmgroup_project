@@ -64,5 +64,6 @@
         <uc:DaySchedule x:Name="Friday" Grid.Row="4" Grid.Column="2"></uc:DaySchedule>
         <uc:DaySchedule x:Name="Saturday" Grid.Row="4" Grid.Column="3"></uc:DaySchedule>
         <Button Grid.Row="5" Grid.Column="0" Command="{Binding UpdateCommand}"> Update </Button>
+        <Button Grid.Row="5" Grid.Column="1" Command="{Binding AddClassCommand}"> Add class</Button>
     </Grid>
 </Page>

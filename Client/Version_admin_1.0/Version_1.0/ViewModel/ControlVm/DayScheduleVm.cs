@@ -38,7 +38,8 @@ namespace Version_1._0.ViewModel.ControlVm
         private void AddLesson(object parameter)
         {
             Lesson lesson = new Lesson();
-            lesson.Time = date;
+            lesson.Time = date.Date;
+            lesson.Time = lesson.Time.AddHours(1.0);
             lesson.Info = "New lesson";
             lessonList.Add(new LessonVm(lesson));
         }

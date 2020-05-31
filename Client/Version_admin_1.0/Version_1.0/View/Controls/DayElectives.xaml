@@ -9,29 +9,34 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock TextAlignment ="Center" Text="{Binding DayOfWeek}" Grid.Row="0" Grid.Column="0"></TextBlock>
+        <TextBlock TextAlignment ="Center" Text="{Binding DayOfWeek}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></TextBlock>
         <TextBlock TextAlignment="Center" Text="{Binding Path=Date, StringFormat=dd-MM-yyyy}"
-                       Grid.Row="0" Grid.Column="1"></TextBlock>
+                       Grid.Row="0" Grid.Column="2"></TextBlock>
 
-        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
-            <ListView ItemsSource ="{Binding Electives}" >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Time, StringFormat=HH:mm}"  Width="150" Header="Начало"></GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Info}" Width="450" Header="Описание"></GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Width="150" Header="Предмет"></GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </ScrollViewer>
+        <Button Grid.Row="1" Grid.Column="0" Command="{Binding AddElectiveCommand}"> Add </Button>
+        <Button Grid.Row="1" Grid.Column="1" Command="{Binding DeleteElectivesCommand}"> Delete </Button>
+        <Button Grid.Row="1" Grid.Column="2" Command="{Binding ApplyElectivesCommand}"> Apply </Button>
+
+        <DataGrid x:Name="ElectivesView" Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding Electives}"
+                  CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False"
+                  CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False"
+                  AutoGenerateColumns="False" SelectionChanged="HandleSelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Time, Mode=TwoWay}" MinWidth="150" Header="Начало"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Info, Mode=TwoWay}" MinWidth="450"  Header="Описание"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Title, Mode=TwoWay}" MinWidth="150" Header="Предмет"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </UserControl>

@@ -20,9 +20,20 @@ namespace Version_1._0.View.Controls
     /// </summary>
     public partial class DayElectives : UserControl
     {
+        public List<int> SelectedIndices { get; set; }
         public DayElectives()
         {
             InitializeComponent();
+            SelectedIndices = new List<int>();
+        }
+
+        private void HandleSelectionChanged(object sender, EventArgs e)
+        {
+            SelectedIndices.Clear();
+            foreach (var curItem in ElectivesView.SelectedItems)
+            {
+                SelectedIndices.Add(ElectivesView.Items.IndexOf(curItem));
+            }
         }
     }
 }
