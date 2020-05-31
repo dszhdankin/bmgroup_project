@@ -15,6 +15,11 @@
         <Setter Property="Control.FontSize" Value="20"></Setter>
         <Setter Property="Control.Background" Value="Aquamarine"></Setter>
     </Style>
+    <Style x:Key="LittleButtonStyle">
+        <Setter Property="Control.Opacity" Value="0.8"></Setter>
+        <Setter Property="Control.FontSize" Value="20"></Setter>
+        <Setter Property="Control.Background" Value="Aquamarine"></Setter>
+    </Style>
     <Style x:Key="Font">
         <Setter Property="Control.FontSize" Value="20"></Setter>
     </Style>

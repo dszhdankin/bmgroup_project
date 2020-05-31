@@ -13,7 +13,7 @@
         <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="{StaticResource MainBackgroundImage}" ShowGridLines="True">
+    <Grid Background="{StaticResource MainBackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -39,11 +39,14 @@
         <TextBlock FontSize="30" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Text="Факультативы" 
                    VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
-        <Button Grid.Row="2" Grid.Column="0" Background="White" Command="{Binding PrevWeekCommand}">
+        <Button Grid.Row="2" Grid.Column="0" Command="{Binding PrevWeekCommand}" Height="200"
+                Style="{StaticResource ButtonStyle}" Grid.RowSpan="2" VerticalAlignment="Center"
+                Margin="30 30 30 30">
             <Image Source="{StaticResource PrevWeekArrow}"></Image>
         </Button>
-        <Button Grid.Row="2" Grid.Column="4" Background="White" Command="{Binding NextWeekCommand}">
-            <Image Source="{StaticResource NextWeekArrow}"></Image>
+        <Button Grid.Row="2" Grid.Column="4" Command="{Binding NextWeekCommand}" Height="200"
+                Style="{StaticResource ButtonStyle}" Grid.RowSpan="2" Margin="30 30 30 30">
+            <Image Source="{StaticResource NextWeekArrow}" ></Image>
         </Button>
 
         <uc:DayElectives x:Name="Monday" Grid.Row="2" Grid.Column="1" DataContext="{Binding Monday}"></uc:DayElectives>
