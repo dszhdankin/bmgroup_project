@@ -6,6 +6,16 @@
              xmlns:local="clr-namespace:Version_1._0.View.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
+    <UserControl.Resources>
+        <Style x:Key="Font">
+            <Setter Property="Control.FontSize" Value="20"></Setter>
+        </Style>
+        <Style x:Key="ButtonStyle">
+            <Setter Property="Control.Opacity" Value="0.7"></Setter>
+            <Setter Property="Control.FontSize" Value="20"></Setter>
+            <Setter Property="Control.Background" Value="Aquamarine"></Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -19,18 +29,24 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock TextAlignment ="Center" Text="{Binding DayOfWeek}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></TextBlock>
-        <TextBlock TextAlignment="Center" Text="{Binding Path=Date, StringFormat=dd-MM-yyyy}" Grid.Row="0" Grid.Column="2"></TextBlock>
+        <TextBlock TextAlignment ="Center" Text="{Binding DayOfWeek}" Grid.Row="0" 
+                   Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource Font}"></TextBlock>
+        <TextBlock TextAlignment="Center" Text="{Binding Path=Date, StringFormat=dd-MM-yyyy}" 
+                   Grid.Row="0" Grid.Column="2" Style="{StaticResource Font}"></TextBlock>
 
-        <Button Grid.Row="1" Grid.Column="0" Command="{Binding AddLessonCommand}"> Add </Button>
-        <Button Grid.Row="1" Grid.Column="1" Command="{Binding DeleteLessonsCommand}"> Delete </Button>
-        <Button Grid.Row="1" Grid.Column="2" Command="{Binding ApplyLessonsCommand}"> Apply </Button>
+        <Button Grid.Row="1" Grid.Column="0" Command="{Binding AddLessonCommand}"
+                Style="{StaticResource ButtonStyle}"> Add </Button>
+        <Button Grid.Row="1" Grid.Column="1" Command="{Binding DeleteLessonsCommand}"
+                Style="{StaticResource ButtonStyle}"> Delete </Button>
+        <Button Grid.Row="1" Grid.Column="2" Command="{Binding ApplyLessonsCommand}"
+                Style="{StaticResource ButtonStyle}"> Apply </Button>
 
         
         <DataGrid x:Name="lessonsView" AutoGenerateColumns="False" ItemsSource="{Binding Path=LessonList}"
                   Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" CanUserAddRows="False"
                   CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
-                  CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="HandleSelectionChanged">
+                  CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="HandleSelectionChanged"
+                  Style="{StaticResource Font}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Начало" MinWidth="70" Binding="{Binding Path=Date, Mode=TwoWay}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Предмет" MinWidth="200" Binding="{Binding Path=Name, Mode=TwoWay}"></DataGridTextColumn>

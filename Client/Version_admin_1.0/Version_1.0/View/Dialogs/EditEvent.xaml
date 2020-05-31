@@ -35,11 +35,12 @@
         </Image>
 
         <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="100" MinHeight="30"
-                FontSize="18" Command="{Binding Path=ChoosePhotoCommand}">
+                Command="{Binding Path=ChoosePhotoCommand}" Style="{StaticResource ButtonStyle}">
             Select photo
         </Button>
 
-        <TextBox x:Name="Name" Grid.Row="2" Grid.Column="0" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
+        <TextBox x:Name="Name" Grid.Row="2" Grid.Column="0" 
+                 Text="{Binding Path=Name, Mode=TwoWay}" Style="{StaticResource Font}"></TextBox>
 
         <Label Grid.Row="2" Grid.Column="1" FontSize="18" HorizontalContentAlignment="Left">
             Name
@@ -54,14 +55,14 @@
         </Label>
 
         <TextBox x:Name="Description" Grid.Row="4" Grid.Column="0" TextWrapping="Wrap"
-                 Text="{Binding Path=Description, Mode=TwoWay}"></TextBox>
+                 Text="{Binding Path=Description, Mode=TwoWay}" Style="{StaticResource Font}"></TextBox>
 
         <Label Grid.Row="4" Grid.Column="1" FontSize="18" HorizontalContentAlignment="Left">
             Discription
         </Label>
 
         <Button Grid.Row="5" Grid.Column="0" Command="{Binding Path=RequestCommand}" 
-                HorizontalAlignment="Left" MinWidth="100">OK</Button>
+                HorizontalAlignment="Left" MinWidth="100" Style="{StaticResource ButtonStyle}">OK</Button>
 
 
     </Grid>

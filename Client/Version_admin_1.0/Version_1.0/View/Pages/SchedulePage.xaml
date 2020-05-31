@@ -12,6 +12,7 @@
         <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
     </Page.Resources>
 
+
     <Grid Background="{StaticResource MainBackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -33,7 +34,6 @@
             <Image Source="{StaticResource OpenBookImage}" Height="30"></Image>
             <TextBlock Margin="50 0 0 0" FontSize="30" Foreground="Black" TextAlignment="Center"
                        VerticalAlignment="Center" Text="Название шараги"></TextBlock>
-            
         </StackPanel>
 
         <TextBlock FontSize="30" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Text="{Binding CurClassName}" 
@@ -49,11 +49,10 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-
-        <Button Grid.Row="3" Grid.Column="0" Background="White" Command="{Binding PrevWeekCommand}">
+        <Button Grid.Row="3" Grid.Column="0" Command="{Binding PrevWeekCommand}" Style="{StaticResource ButtonStyle}">
             <Image Source="{StaticResource PrevWeekArrow}"></Image>
         </Button>
-        <Button Grid.Row="3" Grid.Column="4" Background="White" Command="{Binding NextWeekCommand}">
+        <Button Grid.Row="3" Grid.Column="4" Command="{Binding NextWeekCommand}" Style="{StaticResource ButtonStyle}">
             <Image Source="{StaticResource NextWeekArrow}"></Image>
         </Button>
 
@@ -63,7 +62,9 @@
         <uc:DaySchedule x:Name="Thursday"  Grid.Row="4" Grid.Column="1"></uc:DaySchedule>
         <uc:DaySchedule x:Name="Friday" Grid.Row="4" Grid.Column="2"></uc:DaySchedule>
         <uc:DaySchedule x:Name="Saturday" Grid.Row="4" Grid.Column="3"></uc:DaySchedule>
-        <Button Grid.Row="5" Grid.Column="0" Command="{Binding UpdateCommand}"> Update </Button>
-        <Button Grid.Row="5" Grid.Column="1" Command="{Binding AddClassCommand}"> Add class</Button>
+        <Button Grid.Row="5" Grid.Column="0" Command="{Binding UpdateCommand}" 
+                Style="{StaticResource ButtonStyle}"> Update </Button>
+        <Button Grid.Row="5" Grid.Column="1" Command="{Binding AddClassCommand}"
+                Style="{StaticResource ButtonStyle}"> Add class</Button>
     </Grid>
 </Page>

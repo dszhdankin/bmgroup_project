@@ -34,41 +34,45 @@
         <Button Grid.Row="1" Grid.Column="1" Background="White" Command="{Binding ToScheduleCommand}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="45*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Source="{StaticResource ScheduleButtonImage}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding TimetableTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <Image Grid.Row="0" Stretch="Uniform" Source="{StaticResource ScheduleButtonImage}" ></Image>
+                <TextBlock Grid.Row="1" Text="{Binding TimetableTitle}" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" FontSize="20"></TextBlock>
             </Grid>
         </Button>
         <Button Grid.Row="3" Grid.Column="1" Background="White" Command="{Binding ToElectivesCommand}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="45*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="{StaticResource ElectivesButtonImage}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding ElectivesTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"> </TextBlock>
+                <Image Grid.Row="0" Stretch="Uniform" Source="{StaticResource ElectivesButtonImage}" ></Image>
+                <TextBlock Grid.Row="1" Text="{Binding ElectivesTitle}" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" FontSize="20"> </TextBlock>
             </Grid>
         </Button>
         <Button Grid.Row="1" Grid.Column="3"  Command="{Binding ToEventsCommand}" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="45*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="{StaticResource EventsButtonImage}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding EventsTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"> </TextBlock>
+                <Image Grid.Row="0" Stretch="Uniform" Source="{StaticResource EventsButtonImage}" ></Image>
+                <TextBlock Grid.Row="1" Text="{Binding EventsTitle}" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontSize="20"> </TextBlock>
             </Grid>
         </Button>
         <Button Grid.Row="3" Grid.Column="3" Background="White" Command="{Binding ToEmployeesCommand}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="45*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="{StaticResource EmployeesButtonImage}" Stretch="Fill"></Image>
-                <TextBlock Grid.Row="1" Text="{Binding EmployeesTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"> </TextBlock>
+                <Image Grid.Row="0" Stretch="Uniform" Source="{StaticResource EmployeesButtonImage}" ></Image>
+                <TextBlock Grid.Row="1" Text="{Binding EmployeesTitle}" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontSize="20"> </TextBlock>
             </Grid>
         </Button>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" 

@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Version_1._0.View.Dialogs"
         mc:Ignorable="d"
         Title="EditClass" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -20,8 +23,11 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" FontSize="30">Class</Label>
-        <TextBox Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="{Binding ClassName}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="{Binding ClassName}"
+                 Style="{StaticResource Font}"></TextBox>
         <Label Grid.Row="1" Grid.Column="1" FontSize="30">Name</Label>
-        <Button Grid.Row="5" HorizontalAlignment="Left" MinWidth="100" Command="{Binding RequestCommand}">OK</Button>
+        <Button Grid.Row="5" HorizontalAlignment="Left" 
+                MinWidth="100" Command="{Binding RequestCommand}"
+                Style="{StaticResource ButtonStyle}">OK</Button>
     </Grid>
 </Window>

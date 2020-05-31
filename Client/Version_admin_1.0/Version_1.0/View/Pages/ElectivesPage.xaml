@@ -52,6 +52,7 @@
         <uc:DayElectives x:Name="Thursday" Grid.Row="3" Grid.Column="1" DataContext="{Binding Thursday}"></uc:DayElectives>
         <uc:DayElectives x:Name="Friday" Grid.Row="3" Grid.Column="2" DataContext="{Binding Friday}"></uc:DayElectives>
         <uc:DayElectives x:Name="Saturday" Grid.Row="3" Grid.Column="3" DataContext="{Binding Saturday}"></uc:DayElectives>
-        <Button Grid.Row="4" Grid.Column="0" Command="{Binding UpdateCommand}">Update</Button>
+        <Button Grid.Row="4" Grid.Column="0" Command="{Binding UpdateCommand}"
+                Style="{StaticResource ButtonStyle}">Update</Button>
     </Grid>
 </Page>

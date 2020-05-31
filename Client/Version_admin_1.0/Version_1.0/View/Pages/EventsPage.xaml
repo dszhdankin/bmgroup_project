@@ -49,7 +49,10 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-        <Button Grid.Row="3" Grid.Column="0" Command="{Binding UpdateCommand}"> Update </Button>
-        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" MinWidth="100" Command="{Binding AddEventCommand}">Add event</Button>
+        <Button Grid.Row="3" Grid.Column="0" Command="{Binding UpdateCommand}"
+                Style="{StaticResource ButtonStyle}"> Update </Button>
+        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" 
+                MinWidth="100" Command="{Binding AddEventCommand}"
+                Style="{StaticResource ButtonStyle}">Add event</Button>
     </Grid>
 </Page>
