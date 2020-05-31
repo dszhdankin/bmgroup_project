@@ -88,7 +88,7 @@ namespace Version_1._0.ViewModel.PageVm
             foreach (Class curClass in classes)
             {
                 GroupButton curButton = new GroupButton(curClass.ClassId);
-                curButton.DataContext = new GroupButtonVm(curClass, ChangeClassCommand);
+                curButton.DataContext = new GroupButtonVm(curClass, ChangeClassCommand, curButton);
                 groupButtons.Add(curButton);
             }
             CurClassName = "Property changed";

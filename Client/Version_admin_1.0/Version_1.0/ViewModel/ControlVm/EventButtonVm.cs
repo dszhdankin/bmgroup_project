@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -10,6 +11,7 @@ using System.Windows.Threading;
 using JetBrains.Annotations;
 using Version_1._0.Model;
 using Version_1._0.Utilities;
+using Version_1._0.View.Controls;
 using Version_1._0.View.Dialogs;
 using Version_1._0.ViewModel.WindowVm;
 
@@ -18,9 +20,11 @@ namespace Version_1._0.ViewModel.ControlVm
     class EventButtonVm : INotifyPropertyChanged
     {
         private Event eventInfo;
+        private EventButton eventButton;
 
-        public EventButtonVm(Event eventInfo)
+        public EventButtonVm(Event eventInfo, EventButton eventButton)
         {
+            this.eventButton = eventButton;
             this.eventInfo = eventInfo;
             EditEventCommand = new RelayCommand(obj =>
             {
@@ -47,6 +51,12 @@ namespace Version_1._0.ViewModel.ControlVm
                 });
                 eventDeleter.BeginInvoke(eventInfo, null, null);
             });
+            this.OpenMenuCommand = new RelayCommand(obj =>
+            { 
+                //this.eventButton.Button.ContextMenu.IsOpen = true;
+                //this.eventButton.Button.ContextMenu.Focus();
+                //this.eventButton.Button.ContextMenu.
+            });
         }
 
         public string Description
@@ -64,25 +74,25 @@ namespace Version_1._0.ViewModel.ControlVm
             get => eventInfo.Title;
         }
 
-        public ImageBrush BackgroundImage
+        public BitmapImage BackgroundImage
         {
             get
             {
-                ImageBrush brush = new ImageBrush();
+                BitmapImage image = new BitmapImage();
                 using (MemoryStream stream = new MemoryStream(eventInfo.getBytePhoto()))
                 {
-                    BitmapImage image = new BitmapImage();
+                    image = new BitmapImage();
                     image.BeginInit();
                     image.StreamSource = stream;
                     image.CacheOption = BitmapCacheOption.OnLoad;
                     image.EndInit();
                     image.Freeze();
-                    brush.ImageSource = image;
                 }
-                return brush;
+                return image;
             }
         }
 
+        public ICommand OpenMenuCommand { get; set; }
         public ICommand DeleteEventCommand { get; private set; }
         public ICommand EditEventCommand { get; private set; }
 

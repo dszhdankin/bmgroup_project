@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using JetBrains.Annotations;
 using Version_1._0.Model;
 using Version_1._0.Utilities;
+using Version_1._0.View.Controls;
 using Version_1._0.View.Dialogs;
 using Version_1._0.ViewModel.WindowVm;
 
@@ -19,6 +20,17 @@ namespace Version_1._0.ViewModel.ControlVm
     class GroupButtonVm : INotifyPropertyChanged
     {
         private Class correspondingClass;
+        private GroupButton groupButton;
+
+        public GroupButton GroupButton
+        {
+            get => groupButton;
+            set
+            {
+                groupButton = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void DeleteClass(object parameter)
         {
@@ -39,9 +51,15 @@ namespace Version_1._0.ViewModel.ControlVm
             classDeleter.BeginInvoke(correspondingClass, null, null);
         }
 
-        public GroupButtonVm(Class correspondingClass, ICommand command)
+        private void OpenMenu(object parameter)
+        {
+            this.groupButton.Button.ContextMenu.IsOpen = true;
+        }
+
+        public GroupButtonVm(Class correspondingClass, ICommand command, GroupButton groupButton)
         {
             ChangeClassCommand = command;
+            this.groupButton = groupButton;
             this.correspondingClass = new Class();
             this.correspondingClass.Title = correspondingClass.Title;
             this.correspondingClass.ClassId = correspondingClass.ClassId;
@@ -53,6 +71,7 @@ namespace Version_1._0.ViewModel.ControlVm
                 editClass.ShowDialog();
             });
             DeleteClassCommand = new RelayCommand(DeleteClass);
+            OpenMenuCommand = new RelayCommand(OpenMenu);
         }
 
         public string Title
@@ -60,6 +79,7 @@ namespace Version_1._0.ViewModel.ControlVm
             get => correspondingClass.Title;
         }
 
+        public ICommand OpenMenuCommand { get; private set; }
         public ICommand ChangeClassCommand { get; private set; }
         public ICommand PutClassCommand { get; private set; }
         public ICommand DeleteClassCommand { get; private set; }
