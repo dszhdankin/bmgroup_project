@@ -45,8 +45,9 @@ namespace Version_1._0.ViewModel.PageVm
             eventButtons.Clear();
             foreach (var curEventInfo in eventInfos)
             {
-                EventButtonVm eventButtonVm = new EventButtonVm(curEventInfo);
                 EventButton eventButton = new EventButton();
+                EventButtonVm eventButtonVm = new EventButtonVm(curEventInfo, eventButton);
+                
                 eventButton.DataContext = eventButtonVm;
                 eventButtonViewModels.Add(eventButtonVm);
                 eventButtons.Add(eventButton);

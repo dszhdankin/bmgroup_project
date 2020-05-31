@@ -5,27 +5,46 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Version_1._0.View.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="250" Margin="20 20 0 0" MinHeight="200" MinWidth="300">
+             d:DesignHeight="400" d:DesignWidth="250" Margin="20 20 0 0" MinHeight="300" MinWidth="150"
+             MaxHeight="400" MaxWidth="250">
     <UserControl.Resources>
         <ResourceDictionary Source="../../Resources/ImageResourcesDictionary.xaml"></ResourceDictionary>
     </UserControl.Resources>
-    <Button Background="{Binding BackgroundImage}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-        <Grid ShowGridLines="False">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="3*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding Date}" Foreground="White" TextWrapping="Wrap"></TextBlock>
-            <TextBlock Grid.Row="1" Text ="{Binding Name}" Foreground="White" TextWrapping="Wrap"></TextBlock>
-            <TextBlock Grid.Row="2" Text ="{Binding Description}" Foreground="White" TextWrapping="Wrap"></TextBlock>
-        </Grid>
-        <Button.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="Edit" Command="{Binding EditEventCommand}"></MenuItem>
-                <MenuItem Header="Delete" Command="{Binding DeleteEventCommand}"></MenuItem>
-            </ContextMenu>
-        </Button.ContextMenu>
-    </Button>
+    
+    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="Button" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="{Binding BackgroundImage}" Stretch="Fill"></Image>
+                <TextBlock Grid.Row="1" Text="{Binding Date}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Grid.Row="2" Text ="{Binding Name}" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Grid.Row="3" Text ="{Binding Description}" TextWrapping="Wrap"></TextBlock>
+            </Grid>
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Edit" Command="{Binding EditEventCommand}"></MenuItem>
+                    <MenuItem Header="Delete" Command="{Binding DeleteEventCommand}"></MenuItem>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="0" Content="Edit" Command="{Binding EditEventCommand}"></Button>
+        <Button Grid.Row="1" Grid.Column="1" Content="Delete" Command="{Binding DeleteEventCommand}"></Button>
+    </Grid>
 
 </UserControl>

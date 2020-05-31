@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using JetBrains.Annotations;
 using Version_1._0.Model;
 using Version_1._0.Utilities;
+using Version_1._0.View.Controls;
 using Version_1._0.View.Dialogs;
 using Version_1._0.ViewModel.WindowVm;
 
@@ -17,6 +18,7 @@ namespace Version_1._0.ViewModel.ControlVm
     class EmployeeVm : INotifyPropertyChanged
     {
         private Employee employee;
+        private EmployeeButton employeeButton;
 
         private void PutEmployee(object parameter)
         {
@@ -45,11 +47,13 @@ namespace Version_1._0.ViewModel.ControlVm
             eventDeleter.BeginInvoke(employee, null, null);
         }
 
-        public EmployeeVm(Employee employee)
+        public EmployeeVm(Employee employee, EmployeeButton employeeButton)
         {
+            this.employeeButton = employeeButton;
             this.employee = employee;
             EditEmployeeCommand = new RelayCommand(PutEmployee);
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployee);
+            OpenMenuCommand = new RelayCommand(obj => this.employeeButton.Button.ContextMenu.IsOpen = true);
         }
         
         public event PropertyChangedEventHandler PropertyChanged;
@@ -71,6 +75,7 @@ namespace Version_1._0.ViewModel.ControlVm
 
         public ICommand EditEmployeeCommand { get; private set; }
         public ICommand DeleteEmployeeCommand { get; private set; }
+        public ICommand OpenMenuCommand { get; private set; }
 
         public BitmapImage Photo
         {

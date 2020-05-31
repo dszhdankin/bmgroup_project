@@ -6,13 +6,18 @@
              xmlns:local="clr-namespace:Version_1._0.View.Controls"
              mc:Ignorable="d" 
              >
-    <Button Content="{Binding Title}" Command="{Binding ChangeClassCommand}" Margin="30 0 0 0" MinWidth="100"
-            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType=UserControl}}">
-        <Button.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="Edit" Command="{Binding PutClassCommand}"></MenuItem>
-                <MenuItem Header="Delete" Command="{Binding DeleteClassCommand}"></MenuItem>
-            </ContextMenu>
-        </Button.ContextMenu>
-    </Button>
+    <Grid Margin="30 0 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="Button" Content="{Binding Title}" Command="{Binding ChangeClassCommand}" MinWidth="100"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                Grid.Column="0">
+        </Button>
+        <Button Grid.Column="1" Content="Edit" MinWidth="50" Command="{Binding PutClassCommand}"></Button>
+        <Button Grid.Column="2" Content="Delete" MinWidth="50" Command="{Binding DeleteClassCommand}"></Button>
+    </Grid>
+        
 </UserControl>

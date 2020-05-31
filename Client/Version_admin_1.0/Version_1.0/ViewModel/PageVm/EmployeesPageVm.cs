@@ -39,8 +39,8 @@ namespace Version_1._0.ViewModel.PageVm
                 return;
             foreach (var curEmployee in buffer)
             {
-                EmployeeVm employeeVm = new EmployeeVm(curEmployee);
                 EmployeeButton employeeButton = new EmployeeButton();
+                EmployeeVm employeeVm = new EmployeeVm(curEmployee, employeeButton);
                 employeeButton.DataContext = employeeVm;
                 employeeVms.Add(employeeVm);
                 employeeButtons.Add(employeeButton);
