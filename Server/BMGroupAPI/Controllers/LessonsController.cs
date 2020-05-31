@@ -13,6 +13,7 @@ using BMGroupAPI.Models;
 
 namespace BMGroupAPI.Controllers
 {
+    [Authorize]
     public class LessonsController : ApiController
     {
         private BMGroupAPIContext db = new BMGroupAPIContext();
@@ -36,7 +37,6 @@ namespace BMGroupAPI.Controllers
             return db.Lessons.Where(lesson => lesson.ClassId == classId && day <= lesson.Time && lesson.Time <= nextDay);
         }
 
-        [Authorize]
         // GET: api/Lessons/5
         [ResponseType(typeof(Lesson))]
         public async Task<IHttpActionResult> GetLesson(int id)

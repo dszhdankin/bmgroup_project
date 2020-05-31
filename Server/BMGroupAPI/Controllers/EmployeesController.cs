@@ -13,6 +13,7 @@ using BMGroupAPI.Models;
 
 namespace BMGroupAPI.Controllers
 {
+    [Authorize]
     public class EmployeesController : ApiController
     {
         private BMGroupAPIContext db = new BMGroupAPIContext();
