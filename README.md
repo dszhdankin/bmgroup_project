@@ -8,3 +8,5 @@ Client/Version_1.0/Version_1.0/ViewModel,
 Client/Version_1.0/Version_1.0/View,
 Client/Version_admin_1.0/Version_1.0/ViewModel,
 Client/Version_admin_1.0/Version_1.0/View.
+
+Client part was developed for .NET, using C#, WPF and MVVM disign pattern.
